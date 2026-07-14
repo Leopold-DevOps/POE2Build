@@ -1,0 +1,238 @@
+{
+  "build": "Sanguine Detonation",
+  "leveling_guide": {
+    "acts_1_2_levels_1_25": {
+      "phase_name": "The Apprentice",
+      "primary_skill": "Essence Drain + Contagion",
+      "why": "Teaches curse tempo (prime → detonate) before Hexblast exists; shares passive tree with endgame",
+      "ascendancy": {
+        "trial_location": "Act 2",
+        "reward_node": "Sanguimancy",
+        "timing": "Complete as soon as reasonable",
+        "effect": "Grants Life Remnants + life-cost casting; identity node—take immediately",
+        "playstyle_shift": "Start managing life spend; watch orb; teach the habit on small numbers"
+      },
+      "gear_targets": {
+        "weapon": "Wand or Staff with spell damage",
+        "body_armour": "Any rare with +life and resistances",
+        "boots": "Movement speed ≥20%",
+        "resistances": "Fire/cold/lightning 30%+ (aim for 50% by act 2 end)",
+        "life_floor": "60-80 HP (acts are forgiving)"
+      },
+      "passive_tree": [
+        "Scion start → life wheel (mandatory)",
+        "Path toward Witch chaos/spell damage (overlap with endgame tree)",
+        "Avoid keystones"
+      ],
+      "notes": [
+        "No resspec cost at level 1-5; experiment freely",
+        "Essence Drain is tanky; use this phase to learn movement and rhythm",
+        "Resistances cap at 0% (unneeded acts 1-2); focus life + damage"
+      ]
+    },
+    "act_3_levels_26_40": {
+      "phase_name": "The Initiate",
+      "primary_skill": "Essence Drain (still)",
+      "secondary_skill": "Despair (introduced)",
+      "why": "Rehearse two-beat (Despair → Drain) before Hexblast; introduce curse rhythm",
+      "ascendancy": {
+        "trial_2_location": "Act 3",
+        "reward_node": "Sunder the Flesh",
+        "timing": "Complete 2nd trial for 15% base spell crit",
+        "effect": "Sets spell crit to 15%; every crit node now multiplies a respectable base",
+        "note": "Drain won't crit much; pre-investment for Hexblast"
+      },
+      "curse_introduction": {
+        "skill": "Despair",
+        "role": "Lower chaos res; reduces resistance past 0% is a multiplier",
+        "rotation": "Despair → Drain → move → Despair again (queue next curse before recast)",
+        "timing": "Queue immediately; don't wait for cooldown"
+      },
+      "gear_targets": {
+        "weapon": "Spell damage wand or staff; crit bonus if available",
+        "body_armour": "+80-100 life + resistances (work toward cap)",
+        "resistances": "60%+ fire/cold/lightning (work toward 75% cap by act 3 end)",
+        "life_floor": "200-250 HP"
+      },
+      "passive_tree": [
+        "Previous + second life wheel (Ranger or Witch)",
+        "Spell damage cluster (25-30% total)",
+        "Crit chance foundation (10-15% total)"
+      ],
+      "notes": [
+        "Despair teaches curse rotation; this is the future two-beat",
+        "Crit doesn't scale much yet; focus on life + chaos damage",
+        "Act 3 content is harder; maintain resistance cap"
+      ]
+    },
+    "level_41_ignition": {
+      "event": "Hexblast unlocks (uncut skill gem, level 11)",
+      "prerequisite": "95+ Intelligence (check passives around level 38)",
+      "action": "Equip Hexblast; socket first supports immediately",
+      "first_supports": [
+        "Spell Critical Strike Chance (first; multiplies 15% base)",
+        "Increased Area of Effect (pack overlap, chain jumpable)"
+      ],
+      "rotation_shift": "Despair → Hexblast → move → repeat (not Drain anymore)",
+      "adjustment": "1-2 play sessions; rhythm is slower per cast but much heavier per hit than DoT",
+      "ascendancy": {
+        "trial_3_location": "Act 3 or early maps",
+        "reward_node": "Gore Spike",
+        "timing": "Complete 3rd trial for crit damage = life pool multiplier",
+        "effect": "Crit damage now scales off maximum life; all life nodes are damage nodes post-this"
+      },
+      "gear_shift": {
+        "weapon_now_matters": "Spell damage + crit chance + cast speed become primary",
+        "life_floor": "300-350 HP (dungeons before maps)"
+      },
+      "notes": [
+        "First Hexblast cast feels weak; supports carry; add 3rd/4th support quickly",
+        "Learn two-beat rhythm (curse → blast); it's different from DoT spam",
+        "Despair MUST land before Hexblast to detonate; queue always"
+      ]
+    },
+    "act_3_extension_to_maps_levels_42_58": {
+      "phase_name": "Ramping Up",
+      "primary_skill": "Hexblast (now the focus)",
+      "supports_target": "4-5 links if available",
+      "ascendancy": {
+        "trial_4_location": "maps",
+        "reward_node": "Whispers of the Flesh",
+        "timing": "Maps tier 1-3",
+        "effect": "Reserve enemy life + shut down regen; quiet bossing multiplier"
+      },
+      "gear_progression": {
+        "weapon": [
+          "Spell damage ≥60%",
+          "Crit chance ≥15%",
+          "Cast speed ≥0.2",
+          "Flat chaos ≥15"
+        ],
+        "body_armour": [
+          "Life ≥120",
+          "Resistances capped (75%+)"
+        ],
+        "life_floor": "400-500 HP (maps tier 1-3)"
+      },
+      "passive_tree": [
+        "Spell crit cluster (40-50% total)",
+        "Crit damage cluster (40-60% multiplier)",
+        "Spell damage clean-up",
+        "Curse effect start"
+      ],
+      "gem_leveling": "Hexblast level 12-15; supports scaling"
+    },
+    "maps_levels_59_85": {
+      "phase_name": "The Blood Mage in Full",
+      "tier_progression": "tier 1-3 → tier 4-6 → tier 7-10 → tier 11-16",
+      "ascendancy": {
+        "trial_5": "Crimson Power (if gear budget growing; ES → life) OR Vitality Siphon (if squish; third recovery layer)",
+        "timing": "Post-tier 6; build defensive or offense layer"
+      },
+      "gem_targets": {
+        "hexblast": "Level 18-20",
+        "supports": "Level 16-20",
+        "secondary_skills": "Level 12-15"
+      },
+      "gear_progression": {
+        "tier_1_3": {
+          "life_floor": "600-800",
+          "resistances": "75%+ capped",
+          "crit_chance": "50%+ total"
+        },
+        "tier_4_6": {
+          "life_floor": "1000-1200",
+          "damage": "100%+ spell damage + 50%+ crit + 60%+ crit multi",
+          "curse_effect": "20%+"
+        },
+        "tier_7_10": {
+          "life_floor": "1400-1600",
+          "crit_multiplier": "80%+",
+          "curse_effect": "30%+",
+          "flask_recovery": "Optimized"
+        },
+        "tier_11_16": {
+          "life_floor": "1800-2200",
+          "crit_multiplier": "100%+",
+          "curse_effect": "40%+",
+          "gem_quality": "Optimizing (corruption, +1 level)"
+        }
+      },
+      "gear_shopping": "Use gear-checklist.json and mods-priority.json per tier"
+    },
+    "endgame_levels_86_100": {
+      "phase_name": "Perfecting the Engine",
+      "focus": "Optimization, not progression",
+      "gear": "Hunting for perfect rolls; diminishing returns",
+      "passive_tree": "Jewel sockets + respec lower-value nodes for jewels",
+      "gem_level": "Level 21 via corruption (gemstone)",
+      "support_links": "6-link for Hexblast; perfect support selection"
+    }
+  },
+  "common_leveling_mistakes": [
+    {
+      "mistake": "Skipping Sanguimancy (first ascendancy)",
+      "consequence": "Miss the build's identity; life-cost mechanic doesn't engage",
+      "fix": "Take Sanguimancy at first trial in Act 2"
+    },
+    {
+      "mistake": "Over-investing crit before Hexblast unlocks",
+      "consequence": "Wasted points on low-crit Drain/Contagion",
+      "fix": "Aim for 10-15% total crit acts 1-3; ramp post-Hexblast"
+    },
+    {
+      "mistake": "Neglecting resistances",
+      "consequence": "Act 3 / early maps one-shot",
+      "fix": "Cap resistances by end of Act 3 (75% fire/cold/lightning)"
+    },
+    {
+      "mistake": "Holding onto suboptimal weapon too long",
+      "consequence": "Damage cliff; farms feel slow",
+      "fix": "Weapon is highest damage leverage; upgrade first, rings/boots second"
+    },
+    {
+      "mistake": "Forgetting movement speed on boots",
+      "consequence": "Rhythm breaks; time between casts is danger zone",
+      "fix": "Non-negotiable 25%+ movement speed on boots at all times"
+    },
+    {
+      "mistake": "Over-leveling gem relative to life pool",
+      "consequence": "Casting kills self (higher level = higher life cost)",
+      "fix": "Level gem with life; drop gem one level if costs become lethal"
+    }
+  ],
+  "leveling_checklist_per_act": {
+    "act_1_end": [
+      "✓ Life ≥ 60",
+      "✓ Spell damage ≥30%",
+      "✓ Resistances ≥30% (optional, acts are forgiving)"
+    ],
+    "act_2_end": [
+      "✓ Life ≥ 150",
+      "✓ Spell damage ≥60%",
+      "✓ Resistances ≥60%",
+      "✓ Sanguimancy allocated",
+      "✓ Two-beat learned (Contagion → Drain)"
+    ],
+    "act_3_end": [
+      "✓ Life ≥ 250-300",
+      "✓ Spell damage ≥80%",
+      "✓ Resistances ≥75% (capped)",
+      "✓ Sunder the Flesh allocated",
+      "✓ Despair rotation learned",
+      "✓ 95+ Int for Hexblast unlocking"
+    ],
+    "level_41_post_hexblast": [
+      "✓ Hexblast equipped + first 2 supports",
+      "✓ Gore Spike allocated (ascendancy)",
+      "✓ Life ≥ 350-400",
+      "✓ Crit chance ≥ 35% total"
+    ],
+    "early_maps": [
+      "✓ Life ≥ 600-800",
+      "✓ Crit chance ≥ 50%",
+      "✓ Spell damage ≥ 100%",
+      "✓ Curse effect ≥ 10%"
+    ]
+  }
+}

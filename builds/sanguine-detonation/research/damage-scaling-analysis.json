@@ -1,0 +1,205 @@
+{
+  "build": "Sanguine Detonation",
+  "damage_scaling_framework": {
+    "core_formula": "DPS ≈ (Hex damage per hit) × (crit chance) × (1 + crit multiplier) × (casts per second) × (chain count)",
+    "key_multipliers": {
+      "crit_chance": "Multiplies against 15% (Sunder base); increases hit consistency",
+      "crit_multiplier": "Gore Spike scales this off maximum life",
+      "life_pool": "Gore Spike converts life → crit damage (hidden scaling stat)",
+      "curse_effect": "Despair reduction multiplies damage (resistance reduction past 0% is exponential)",
+      "cast_speed": "Compresses two-beat rhythm",
+      "chain_count": "Explosions chain (capped at 10 per patch)"
+    }
+  },
+  "stat_scaling_tiers": {
+    "maximum_life_to_gore_spike": {
+      "mechanic": "Gore Spike scales crit damage bonus off maximum life",
+      "formula": "Crit Damage % added = Maximum Life × Gore Spike Scale Factor",
+      "example": [
+        "Life pool 1000: +80% crit damage (Gore Spike tier 1)",
+        "Life pool 1500: +120% crit damage (compounding)",
+        "Life pool 2000: +160% crit damage (scaling continues)"
+      ],
+      "implication": "Every life node is a damage node post-ascendancy allocation",
+      "scaling_type": "EXPONENTIAL (life → crit damage → hit damage)"
+    },
+    "spell_crit_chance": {
+      "base": "15% (Sunder the Flesh)",
+      "tree_contribution": "30-50%+ from passives",
+      "gear_contribution": "15-25% from jewelry + weapon",
+      "total_target": "50-60% (comfortable → high consistency)",
+      "scaling_type": "LINEAR_THEN_SOFT_CAP (diminishing past 80%+)"
+    },
+    "spell_crit_damage": {
+      "base": "1.5× (default multiplier floor)",
+      "tree_contribution": "60-80%+ from nodes",
+      "gear_contribution": "40-60%+ from jewelry",
+      "gore_spike_contribution": "80-160%+ from life pool",
+      "total_target": "220-280% (comfortable → high variance)",
+      "scaling_type": "MULTIPLICATIVE (with Gore Spike and life)"
+    },
+    "chaos_damage_percent": {
+      "gear_early": "60-100% spell damage % + 30-50% chaos damage %",
+      "gear_late": "100%+ spell damage % + 50-80% chaos damage %",
+      "tree_early": "40-60% spell damage",
+      "tree_late": "80-120% spell damage + 20-30% curse effect",
+      "total_multiplier": "2-3× base damage (multiplicative)",
+      "scaling_type": "LINEAR (adds multiplicatively to hit damage)"
+    },
+    "flat_chaos_damage": {
+      "early_game": "5-15 flat chaos (scales well with high added-damage effectiveness)",
+      "mid_game": "20-30 flat chaos (mixed with % scaling)",
+      "late_game": "50-80 flat chaos (quality-of-life; % dominates late)",
+      "effectiveness": "Hexblast has high added-damage effectiveness (~140%); flat punches above weight early",
+      "scaling_type": "DIMINISHING (% outscales flat late)"
+    },
+    "curse_effect_on_despair": {
+      "mechanic": "Despair reduces chaos res; curse effect deepens the cut",
+      "example": [
+        "Despair base: -30% chaos res",
+        "With +50% curse effect: -45% chaos res (cumulative)",
+        "Formula: damage multiplier = 1 / (1 - (resistance - reduction))",
+        "No curse: 1.43× damage multiplier (30% res enemy)",
+        "With Despair: 2.0× damage multiplier (effective)",
+        "With +50% curse: 2.5-3.0× damage multiplier (exponential)"
+      ],
+      "implication": "Curse effect is a hidden more-multiplier; even 10% curse effect is 5-10% damage",
+      "scaling_type": "EXPONENTIAL (resistance reduction compounds)"
+    },
+    "cast_speed": {
+      "formula": "DPS ≈ (damage per hit) × (casts per second)",
+      "timing": "Affects two-beat rhythm (curse → blast → move)",
+      "quality_of_life": "Higher cast speed tightens rotation; safer mapping",
+      "example": [
+        "0.8 casts/sec: 1.25 sec per cast (slow, clunky)",
+        "1.0 casts/sec: 1.0 sec per cast (comfortable)",
+        "1.2 casts/sec: 0.83 sec per cast (snappy, rhythm tight)"
+      ],
+      "scaling_type": "LINEAR (direct DPS multiplier)"
+    }
+  },
+  "damage_breakpoints": {
+    "acts_1_2": {
+      "expected_damage_range": "30-100 per hit",
+      "scaling_drivers": [
+        "Spell damage % (tree + gear)",
+        "Flat chaos damage (gear)",
+        "Added gem levels"
+      ],
+      "crit_relevance": "Low; Drain doesn't crit much; crit is pre-investment"
+    },
+    "act_3": {
+      "expected_damage_range": "100-300 per hit (Drain still; pre-Hexblast)",
+      "scaling_drivers": [
+        "Spell damage % (growing tree allocation)",
+        "Flat chaos + crit foundation"
+      ]
+    },
+    "hexblast_ignition": {
+      "expected_damage_range": "150-400 per hit initial",
+      "scaling_drivers": [
+        "Hexblast base damage (level 11, 12, etc.)",
+        "Spell damage %",
+        "Crit chance (now 15% base—starts mattering)",
+        "Flat chaos (high added-damage effectiveness)"
+      ],
+      "note": "Feels weak initially; supports carry; ramps with gems + tree"
+    },
+    "early_maps_tier_1_3": {
+      "expected_damage_range": "600-1500 per crit hit (chain copies)",
+      "scaling_drivers": [
+        "Crit chance 50%+ (consistent crits)",
+        "Crit multiplier 80%+",
+        "Gore Spike multiplier (life × factor)",
+        "Curse effect 10%+ (Despair multiplier)",
+        "Spell damage 100%+"
+      ],
+      "chain_scaling": "Up to 10 explosions per cast (pack clearing)"
+    },
+    "mid_maps_tier_7_10": {
+      "expected_damage_range": "2000-5000 per crit hit",
+      "scaling_drivers": [
+        "Life pool 1200-1600 (Gore Spike compounding)",
+        "Crit multiplier 100%+",
+        "Spell damage 150%+",
+        "Curse effect 20-30%"
+      ],
+      "note": "Single target (boss) feels weak vs. packs; Whispers regen shutdown is key"
+    },
+    "late_maps_tier_11_16": {
+      "expected_damage_range": "4000-8000+ per crit hit",
+      "scaling_drivers": [
+        "Life pool 1800-2200 (Gore Spike at peak)",
+        "Crit multiplier 120-150%+",
+        "Spell damage 180%+",
+        "Curse effect 40%+",
+        "Gem level 20-21"
+      ],
+      "note": "Boss DPS still limited by single-target curse; use second Despair variant (curse duration) for long fights"
+    }
+  },
+  "scaling_priority_by_phase": {
+    "acts_1_2": [
+      "1. Spell damage % (foundation)",
+      "2. Maximum life (defense + fuel)",
+      "3. Flat chaos damage (early efficiency)",
+      "4. Resistances (cap by end)"
+    ],
+    "act_3": [
+      "1. Spell damage % (continue foundation)",
+      "2. Maximum life (ramp)",
+      "3. Spell crit chance (pre-investment for Hexblast)",
+      "4. Resistances (cap)"
+    ],
+    "early_maps": [
+      "1. Maximum life (Gore Spike foundation)",
+      "2. Spell crit chance (50% total)",
+      "3. Crit damage (stacks with Gore Spike)",
+      "4. Curse effect (Despair multiplier)"
+    ],
+    "mid_maps": [
+      "1. Maximum life (exponential scaling via Gore Spike)",
+      "2. Crit multiplier (80%+ is breakpoint)",
+      "3. Spell damage % (secondary to life)",
+      "4. Curse effect (30%+ is comfortable)"
+    ],
+    "late_maps": [
+      "1. Maximum life (compounding Gore Spike damage)",
+      "2. Crit multiplier (120%+ is endgame floor)",
+      "3. Curse effect (40%+ multiplier)",
+      "4. Gem levels (corruption +1 level)"
+    ]
+  },
+  "damage_efficiency_chart": {
+    "life_to_dps": {
+      "conversion": "+100 life ≈ +5% crit damage (via Gore Spike) ≈ +2-3% total DPS",
+      "note": "Most efficient damage investment; also defense"
+    },
+    "crit_chance_to_dps": {
+      "conversion": "+10% crit ≈ +7-10% DPS (more consistent crits)",
+      "efficiency": "Good early; diminishing past 50% total"
+    },
+    "crit_multiplier_to_dps": {
+      "conversion": "+30% multiplier ≈ +8-10% DPS (multiplicative)",
+      "efficiency": "Excellent mid/late; stacks with life pool"
+    },
+    "curse_effect_to_dps": {
+      "conversion": "+10% curse effect ≈ +5-8% DPS (exponential resistance scaling)",
+      "efficiency": "Quiet multiplier; easily overlooked"
+    },
+    "spell_damage_to_dps": {
+      "conversion": "+30% spell damage ≈ +30% DPS (linear)",
+      "efficiency": "Good early; diluted late (tree caps)"
+    }
+  },
+  "dps_calculation_checklist": {
+    "step_1_base_hit": "Hexblast base damage (gem level) + flat chaos from gear",
+    "step_2_spell_scaling": "× (1 + spell damage % from tree + gear)",
+    "step_3_crit_floor": "× crit chance (15% base + tree + gear)",
+    "step_4_gore_spike": "× (1 + life pool × Gore Spike factor)",
+    "step_5_curse_multiplier": "× resistance reduction factor (1 / (1 - (−res + curse reduction)))",
+    "step_6_cast_speed": "× casts per second (1 / cast time × (1 + cast speed %))",
+    "step_7_chain_scaling": "× average chain hits per cast (up to 10 per patch)",
+    "final": "= estimated DPS per second"
+  }
+}

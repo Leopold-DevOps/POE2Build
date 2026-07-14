@@ -1,0 +1,160 @@
+{
+  "build": "Sanguine Detonation",
+  "skill_progression": {
+    "primary_skill": "Hexblast",
+    "skill_acquisition_level": 41,
+    "uncut_gem_level": 11,
+    "required_attributes": "95+ Intelligence",
+    "progression_phases": {
+      "acts_1_2_levels_1_25": {
+        "primary": "Essence Drain",
+        "secondary": "Contagion",
+        "strategy": "Chaos DoT leveler; same tree clusters as endgame; teaches curse tempo (Contagion primes, Drain detonates)",
+        "support_gems": [
+          "Controlled Destruction (damage)",
+          "Increased Area of Effect (spread)",
+          "Efficacy (DoT scaling)"
+        ],
+        "ascendancy_1": "Sanguimancy (free at first trial)",
+        "ascendancy_1_note": "Start practicing life-cost management early; small costs teach the habit",
+        "why_this_phase": "Zero respec cost at level 1-25; cluster on life and chaos damage; ascendancy is identity—take immediately"
+      },
+      "act_3_levels_26_40": {
+        "primary": "Essence Drain (still)",
+        "secondary": "Despair",
+        "strategy": "Rehearse two-beat (Despair → Drain) before Hexblast arrives; introduce curse rhythm",
+        "ascendancy_2": "Sunder the Flesh (points 1-2)",
+        "ascendancy_2_note": "15% base crit now; Drain doesn't crit much, but it's pre-investment for Hexblast",
+        "curse_introduction": "Despair reduces chaos res; queue it before Drain detonations; this is the future rhythm",
+        "gear_note": "Cap resistances; grab 60%+ life + resistances; spell damage is bonus"
+      },
+      "level_41_ignition": {
+        "event": "Hexblast unlocks",
+        "action": "Engrave level 11 uncut gem (need 95 int by level ~38; check passives)",
+        "first_supports": [
+          "Spell Critical Strike Chance (first slot—multiplies 15% base)",
+          "Increased Area of Effect (for chain overlap)"
+        ],
+        "rotation_shift": "Despair → Hexblast → move → repeat (not Despair → Drain anymore)",
+        "adjustment_period": "1-2 play sessions; rhythm is slower per cast but heavier per hit than DoT leveling",
+        "ascendancy_3": "Gore Spike (points 3-4)",
+        "ascendancy_3_timing": "Once Hexblast is online; this multiplies crit damage by life pool",
+        "gear_check": "Weapon now matters; spell damage + crit chance + cast speed"
+      },
+      "maps_levels_60_90": {
+        "primary": "Hexblast (6-link if available)",
+        "supports_progression": {
+          "mandatory": [
+            "Spell Critical Strike Chance",
+            "Increased Area of Effect"
+          ],
+          "early_maps": [
+            "Spell Critical Damage",
+            "Cast Speed"
+          ],
+          "mid_maps": [
+            "Chaos Damage or Penetration effect"
+          ],
+          "late_maps": [
+            "Flex slot: utility if survival needed"
+          ]
+        },
+        "secondary": "Despair (single-target variant optional)",
+        "curse_setup": "1x Despair (pack AoE + duration); optionally 2x Despair variant (single-target, curse effect + duration for bosses)",
+        "ascendancy_4": "Whispers of the Flesh (points 5-6)",
+        "ascendancy_4_note": "Reserve enemy life + shut down regen; quietly a bossing multiplier",
+        "ascendancy_5": "Crimson Power OR Vitality Siphon (points 7-8)",
+        "ascendancy_5_decision": "Crimson: if gear budget growing (ES → life). Vitality: if squish (third recovery layer)",
+        "gem_level_track": "Level 20 Hexblast by maps; level 1-5 supports scale gem level, not just support level"
+      }
+    }
+  },
+  "support_gem_roles": {
+    "hexblast_links": [
+      {
+        "slot": 1,
+        "role": "Crit Chance Floor",
+        "gems": ["Spell Critical Strike Chance Support"],
+        "reasoning": "Multiplies 15% base; every crit node you take is now working on a respectable foundation"
+      },
+      {
+        "slot": 2,
+        "role": "Crit Damage Multiplier",
+        "gems": ["Critical Strike Multiplier Support", "Increased Critical Damage Support"],
+        "reasoning": "Stacks with Gore Spike; more-multiplier > increased; favor 'more' if choosing"
+      },
+      {
+        "slot": 3,
+        "role": "Pack Clear (AoE)",
+        "gems": ["Increased Area of Effect Support"],
+        "reasoning": "Chain needs overlap; AoE widens both curse and explosion; scales pack-wide on 10-explosion cap"
+      },
+      {
+        "slot": 4,
+        "role": "Cast Speed",
+        "gems": ["Faster Casting Support", "Increased Cast Speed Support"],
+        "reasoning": "Accelerates two-beat rhythm; also speeds rotation between packs"
+      },
+      {
+        "slot": 5,
+        "role": "Damage Flex",
+        "gems": ["Added Chaos Damage Support", "Chaos Damage Support", "Penetration effects"],
+        "reasoning": "Patch-dependent; check which offers most damage; or swap utility if survivability needed"
+      },
+      {
+        "slot": 6,
+        "role": "Flex (Utility or Damage)",
+        "gems": ["Utility: Increased Spell Suppression", "Damage: Controlled Destruction"],
+        "reasoning": "Depends on gear/defense floor; if safe, damage; if risky, defense"
+      }
+    ],
+    "despair_links": [
+      {
+        "slot": 1,
+        "role": "Curse AoE",
+        "gems": ["Increased Area of Effect Support"],
+        "reasoning": "Hit whole pack in one cast; chain needs multiple hexed targets to jump"
+      },
+      {
+        "slot": 2,
+        "role": "Curse Effect",
+        "gems": ["Curse Effect Support"],
+        "reasoning": "Deepens Despair resistance reduction (hidden more-multiplier); deepest cut = most damage"
+      },
+      {
+        "slot": 3,
+        "role": "Optional: Single-Target Duration",
+        "gems": ["Curse Duration Support (if second Despair setup)"],
+        "reasoning": "Bosses shrug curse duration; long-fight variant keeps Despair fresh"
+      }
+    ],
+    "movement_skill": {
+      "gems": ["Blink Arrow", "Flame Dash", "Leap Slam"],
+      "requirement": "Non-negotiable; rhythm plants feet; time between casts = danger",
+      "note": "1-2 supports (usually speed or cooldown); exact gem is player preference"
+    },
+    "utility_buff": {
+      "gems": ["Zealotry", "Malevolence", "Determination"],
+      "spirit_budget": "Spend on flat damage to spells (scales Hexblast high added-damage effectiveness) or defense (life-adjacent)",
+      "note": "Exact choice depends on gear/defense; prioritize flat chaos if budget allows"
+    }
+  },
+  "gem_level_scaling": {
+    "hexblast": {
+      "level_1": "Low damage; high mana cost",
+      "level_10": "Baseline for mapping",
+      "level_20": "Endgame standard; each level adds ~5% damage",
+      "level_21_exceptional": "If corrupted or quest reward; consider weapon upgrade before gem 21"
+    },
+    "supports": {
+      "scaling": "Support gem level scales support bonus + added damage; not just the gem's own bonus",
+      "priority": "Level supports to cap damage scaling; Hexblast benefit from level 20 supports is significant"
+    }
+  },
+  "skill_gem_notes": {
+    "patch_sensitivity": "Gem values shift; use in-game tooltip as source of truth, not guide numbers",
+    "quality_scaling": "Quality bonuses sometimes major (e.g. Hexblast quality rewards fresh curse detonation timing)",
+    "corruption_path": "Late-endgame: +1 gem level (gemstone) or +1 quality (divine vessel) are BiS upgrades",
+    "defensive_swap": "Despair → Enfeeble or Temporal Chains in hard content; same setup, different curse = different playstyle"
+  }
+}

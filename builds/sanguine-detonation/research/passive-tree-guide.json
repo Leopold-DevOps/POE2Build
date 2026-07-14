@@ -1,0 +1,172 @@
+{
+  "build": "Sanguine Detonation",
+  "passive_tree_principles": {
+    "core_philosophy": "Shop like the engine: maximum life is the primary stat (defense + fuel + damage). When two routes cost the same, pick the one passing through life.",
+    "priority_order": [
+      "Priority 1: Maximum Life % (triple-dip)",
+      "Priority 2: Spell Crit Chance % (multiplies 15% base)",
+      "Priority 3: Crit Damage Bonus (stacks with Gore Spike)",
+      "Priority 4: Chaos / Spell Damage (bread-and-butter)",
+      "Priority 5: Curse Effect & AoE",
+      "Priority 6: Life Recovery & Flask (replaces leech post-0.5)"
+    ],
+    "budget_principle": "Unreserved life must absorb several consecutive casts + one nasty hit. If casting twice while clipped by boss slam would kill you, respec crit for life."
+  },
+  "key_clusters": {
+    "life_wheel_scion": {
+      "node_count": "~10 points",
+      "yield": "+50-60% maximum life",
+      "pathing": "Scion start; foundational life cluster",
+      "priority": "TIER_0 - always take",
+      "timing": "Early leveling"
+    },
+    "life_wheel_ranger": {
+      "node_count": "~8 points",
+      "yield": "+40-50% maximum life",
+      "pathing": "Right side of tree",
+      "priority": "TIER_0 - always take if pathing efficient",
+      "synergy": "Also passes spell damage nodes"
+    },
+    "life_wheel_witch": {
+      "node_count": "~10 points",
+      "yield": "+50-60% maximum life",
+      "pathing": "Left side of tree",
+      "priority": "TIER_0 - always take if pathing efficient",
+      "synergy": "Close to spell damage clusters"
+    },
+    "spell_crit_cluster": {
+      "node_count": "~6-8 points",
+      "yield": "+25-40% spell crit chance",
+      "pathing": "Varies by ascendancy starting point",
+      "priority": "TIER_1 - stack until ~50% total (15% base + tree + gear)",
+      "note": "Diminishing returns near cap; crit chance plateaus"
+    },
+    "crit_damage_cluster": {
+      "node_count": "~5-7 points",
+      "yield": "+60-100% crit multiplier",
+      "pathing": "Usually right side (Ranger influence)",
+      "priority": "TIER_1 - stack after chance floor (50%) is solid",
+      "synergy": "Stacks multiplicatively with Gore Spike"
+    },
+    "spell_damage_cluster": {
+      "node_count": "~4-6 points",
+      "yield": "+30-50% spell damage",
+      "pathing": "Multiple clusters (Witch left, Ranger right)",
+      "priority": "TIER_2 - front-load early, respec late if crowded",
+      "scaling": "Good value early; diminishing late (hard caps on scaling)"
+    },
+    "curse_effect_cluster": {
+      "node_count": "~3-4 points",
+      "yield": "+20-40% curse effect",
+      "pathing": "Typically mid-tree or jewel socket",
+      "priority": "TIER_2 - mid/late game; deepens Despair resistance cut",
+      "note": "Hidden more-multiplier; worth the investment"
+    },
+    "flask_recovery_cluster": {
+      "node_count": "~4-5 points",
+      "yield": "+30-50% flask charge recovery, +20-30% flask recovery rate",
+      "pathing": "Varies (Ranger/Scion influence)",
+      "priority": "TIER_2_TO_1 - life-spend class makes this critical post-0.5",
+      "note": "Do NOT skip; replaces leech as sustain layer"
+    },
+    "jewel_sockets": {
+      "count": "2-3 points per socket",
+      "pathing_rule": "Allocate if one point off-path; jewels rebalance per patch (no tree respec needed)",
+      "priority": "TIER_2 - insurance against patch nerfs",
+      "jewel_stats": "Life % + crit multi is dream combo (both feed Gore Spike math)"
+    }
+  },
+  "pathfinding_rules": {
+    "rule_1_life_preference": "When two routes cost the same, pick the one passing through life",
+    "rule_2_jewel_sockets": "Allocate 1-point-off-path jewel sockets; jewels are respec-insurance",
+    "rule_3_cast_speed_sprinkle": "Cheap cast speed nodes are QoL; sprinkle in when available (accelerates two-beat rhythm)",
+    "rule_4_avoid_traps": "Avoid pure attribute nodes unless needed for gear requirements; plan attributes early",
+    "rule_5_cluster_efficiency": "Cluster pathing matters: if cluster requires 8 points for 5 useful nodes, reconsider vs. alternative"
+  },
+  "level_milestone_allocations": {
+    "level_24": {
+      "recommended_stats": "+100-120 life, +30% spell damage, +15% crit chance",
+      "example_path": "Scion start → life wheel → right side spell damage"
+    },
+    "level_41": {
+      "recommended_stats": "+150-180 life, +50% spell damage, +25% crit chance",
+      "example_path": "previous + Ranger life wheel OR Witch spell damage cluster"
+    },
+    "level_60": {
+      "recommended_stats": "+250-300 life, +80% spell damage, +40% crit chance",
+      "example_path": "previous + crit damage cluster + curse effect start"
+    },
+    "level_70": {
+      "recommended_stats": "+350-400 life, +100% spell damage, +50% crit chance, +30% crit multiplier",
+      "example_path": "previous + flask recovery cluster + jewel socket"
+    },
+    "level_90": {
+      "recommended_stats": "+500-600 life, +120-150% spell damage, +60% crit chance, +80% crit multiplier, +40% curse effect",
+      "example_path": "Min 3 life wheels, 2-3 crit clusters, flask recovery layer, jewels"
+    }
+  },
+  "notable_keystone_candidates": {
+    "avoided": [
+      "Keystones that lock you into one mechanic (Scion start doesn't naturally pass keystones anyway)",
+      "Energy-shield primaries (blood mage pays to bleed, not shield)"
+    ],
+    "situational": [
+      {
+        "name": "Custom keystones (patch-dependent)",
+        "check": "Verify each patch; keystones shift"
+      }
+    ]
+  },
+  "tree_pathing_checklist": {
+    "act_2": {
+      "checklist": [
+        "✓ Allocated Sanguimancy (ascendancy foundation)",
+        "✓ Path toward first life wheel (Scion)",
+        "✓ 60+ life total (defense floor for acts 1-2)"
+      ]
+    },
+    "act_3": {
+      "checklist": [
+        "✓ First life wheel complete",
+        "✓ Allocated Sunder the Flesh (ascendancy crit floor)",
+        "✓ Path toward spell damage cluster",
+        "✓ 150+ life total"
+      ]
+    },
+    "early_maps": {
+      "checklist": [
+        "✓ Allocated Gore Spike (crit damage multiplier)",
+        "✓ Two life wheels complete",
+        "✓ Crit cluster (40-50% total crit chance)",
+        "✓ 400+ unreserved life"
+      ]
+    },
+    "mid_maps": {
+      "checklist": [
+        "✓ Allocated Whispers of the Flesh (curse regen shutdown)",
+        "✓ Crit damage cluster (60%+ multiplier)",
+        "✓ Curse effect cluster started",
+        "✓ 600+ unreserved life"
+      ]
+    },
+    "late_maps": {
+      "checklist": [
+        "✓ Allocated Crimson Power or Vitality Siphon (ascendancy complete)",
+        "✓ Flask recovery cluster",
+        "✓ 1-2 jewel sockets allocated",
+        "✓ 1000+ unreserved life"
+      ]
+    }
+  },
+  "tree_vs_gear_tradeoff": {
+    "principle": "Tree provides % scaling; gear provides flat stats + cap floors (resistances, attributes)",
+    "life_acquisition": "Tree + gear together; roughly 60% life from tree, 40% from gear at endgame",
+    "crit_floor": "Must hit 50% crit chance total; tree provides foundation, gear/supports seal it",
+    "example_decision": "If missing 20% crit chance: tree is cheaper overall; if missing 50 life, gear is faster to fix"
+  },
+  "tree_respec_insurance": [
+    "Allocate jewel sockets early (1-point-off-path)",
+    "Keep 1-2 respecs in reserve for patch pivots",
+    "If keystones shift, jewel respec is cheaper than full tree respec"
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "build": "Sanguine Detonation",
+  "trade_api_search_templates": {
+    "note": "Use poe.ninja / trade sites; these templates show which mods to prioritize per slot",
+    "template_format": {
+      "slot": "equipment slot",
+      "must_haves": ["critical_mods"],
+      "search_order": "priority order for search refinement",
+      "example_search": "poe.ninja format string (for reference)"
+    }
+  },
+  "weapon_focus_search": {
+    "item_type": ["Wand", "Sceptre"],
+    "rarity": "rare",
+    "must_have_1": {
+      "stat": "Spell Damage +X%",
+      "min": 50,
+      "reason": "Baseline damage multiplier"
+    },
+    "must_have_2": {
+      "stat": "Spell Critical Strike Chance +X%",
+      "min": 15,
+      "reason": "Multiplies 15% base; early chance provider"
+    },
+    "must_have_3": {
+      "stat": "Cast Speed +X%",
+      "min": 0.15,
+      "reason": "QoL + DPS multiplier"
+    },
+    "must_have_4": {
+      "stat": "Added Chaos Damage +X",
+      "min": 15,
+      "reason": "Scales with high added-damage effectiveness; high impact early"
+    },
+    "nice_to_have": [
+      "Crit Multiplier +X%",
+      "Critical Strike Chance (non-spell, covers bases)",
+      "Maximum Life +X"
+    ],
+    "search_progression": [
+      "Step 1: Filter item type (Wand) + min spell damage 50%",
+      "Step 2: Add crit chance ≥15%",
+      "Step 3: Refine cast speed ≥0.15",
+      "Step 4: Add flat chaos ≥15",
+      "Step 5: Sort by price; evaluate top 20"
+    ],
+    "budget_breakpoints": {
+      "early_maps": "budget 5-20c for solid base (50% spell, 15% crit, 0.2 speed, 15 flat)",
+      "mid_maps": "budget 50-200c for upgrade (60% spell, 20% crit, 0.25 speed, 25 flat)",
+      "late_maps": "budget 500c-5ex for high-roll (70%+ spell, 25%+ crit, 0.3+ speed, 35+ flat)"
+    }
+  },
+  "body_armour_search_no_crimson": {
+    "item_type": ["Robe", "Dress"],
+    "rarity": "rare",
+    "must_have_1": {
+      "stat": "Maximum Life +X",
+      "min": 80,
+      "reason": "Triple-dip stat"
+    },
+    "must_have_2": {
+      "stat": "Fire Resistance +X%",
+      "min": 30,
+      "reason": "Cap resistances (75%+)"
+    },
+    "must_have_3": {
+      "stat": "Cold Resistance +X%",
+      "min": 30,
+      "reason": "Cap resistances"
+    },
+    "must_have_4": {
+      "stat": "Lightning Resistance +X%",
+      "min": 30,
+      "reason": "Cap resistances"
+    },
+    "search_progression": [
+      "Step 1: Filter item type (Robe) + min life 80",
+      "Step 2: Add ≥30% fire resistance",
+      "Step 3: Add ≥30% cold resistance",
+      "Step 4: Add ≥30% lightning resistance (or accept two of three capped)",
+      "Step 5: Sort by life (descending); evaluate top 30"
+    ]
+  },
+  "body_armour_search_with_crimson": {
+    "item_type": ["Robe", "Dress"],
+    "rarity": "rare",
+    "note": "If Crimson Power is allocated: ES converts to extra maximum life (damage + defense)",
+    "must_have_1": {
+      "stat": "Energy Shield +X",
+      "min": 250,
+      "reason": "Converts to extra life (priority if Crimson allocated)"
+    },
+    "must_have_2": {
+      "stat": "Fire Resistance +X%",
+      "min": 30
+    },
+    "must_have_3": {
+      "stat": "Cold Resistance +X%",
+      "min": 30
+    },
+    "must_have_4": {
+      "stat": "Lightning Resistance +X%",
+      "min": 30
+    },
+    "secondary": "Maximum Life (if ES slot has room)",
+    "search_progression": [
+      "Step 1: Filter item type + min ES 250",
+      "Step 2: Add fire/cold/lightning ≥30% (pick two or all three)",
+      "Step 3: Sort by ES (descending)",
+      "Step 4: Evaluate top 20; cross-check life rolls"
+    ]
+  },
+  "boots_search": {
+    "item_type": "Boots",
+    "rarity": "rare",
+    "must_have_1": {
+      "stat": "Movement Speed +X%",
+      "min": 25,
+      "reason": "NON-NEGOTIABLE; rhythm plants feet; time between casts = danger"
+    },
+    "must_have_2": {
+      "stat": "Maximum Life +X",
+      "min": 60,
+      "reason": "Defense + fuel + damage"
+    },
+    "must_have_3": {
+      "stat": "Resistances (fire/cold/lightning)",
+      "min_each": 25,
+      "reason": "Work toward cap (75%+)"
+    },
+    "priority_note": "Movement speed IS the primary affix; do not sacrifice it for small life/res gains",
+    "search_progression": [
+      "Step 1: Filter boots + movement speed ≥25%",
+      "Step 2: Add life ≥60",
+      "Step 3: Refine by resistances needed",
+      "Step 4: Sort by movement speed (descending)",
+      "Step 5: Prioritize speed over life trades"
+    ]
+  },
+  "rings_amulet_search": {
+    "item_type": ["Ring", "Amulet"],
+    "rarity": "rare",
+    "ring_must_have_1": {
+      "stat": "Maximum Life +X",
+      "min": 40,
+      "reason": "Triple-dip"
+    },
+    "ring_must_have_2": {
+      "stat": "Chaos Resistance +X%",
+      "min": 10,
+      "reason": "Bonus (melee-range remnant pickup)"
+    },
+    "ring_nice_to_have": [
+      "Added Chaos Damage to Spells +X",
+      "Spell Critical Strike Chance +X%",
+      "Fire/Cold/Lightning Resistance"
+    ],
+    "amulet_must_have_1": {
+      "stat": "Maximum Life +X",
+      "min": 40
+    },
+    "amulet_nice_to_have": [
+      "Added Chaos Damage to Spells +X",
+      "Critical Strike Multiplier +X%",
+      "Spell Critical Strike Chance +X%",
+      "Fire/Cold/Lightning Resistance"
+    ],
+    "search_progression": [
+      "Step 1: Filter jewelry type + life ≥40",
+      "Step 2: Add chaos damage (if searching amulet/ring separately)",
+      "Step 3: Sort by life (descending) or combined stats",
+      "Step 4: Evaluate top 30"
+    ]
+  },
+  "flask_search": {
+    "item_type": "Life Flask",
+    "rarity": "unique OR rare with perfect mods",
+    "must_have_1": {
+      "stat": "Life Recovery Rate +X%",
+      "min": 30,
+      "reason": "Speed up flask; life-spend class makes this tier-0"
+    },
+    "must_have_2": {
+      "stat": "Charges Gained +X (or similar)",
+      "min": 1,
+      "reason": "Maintain uptime"
+    },
+    "nice_to_have_1": {
+      "stat": "Instant recovery when flask depleted",
+      "reason": "Highest priority if available"
+    },
+    "nice_to_have_2": {
+      "stat": "Reduced effect of Curses (self-defense)",
+      "reason": "QoL defensive layer"
+    },
+    "search_note": "Most life flasks are rares; uniques may not match all stats. Judge by recovery rate + charges generated",
+    "budget": "50-500c for perfect roll depending on phase"
+  },
+  "unique_item_checklist": {
+    "the_covenant": {
+      "type": "Body Armour (Robe)",
+      "value": "Life Remnants + life-cost casting",
+      "synergy": "THEMATIC BUT PARTIALLY REDUNDANT",
+      "ascendancy_overlap": "Sanguimancy already grants remnants + life-cost",
+      "decision_rule": "Judge raw ES/life roll vs. rare; if rare is better baseline, use it",
+      "price_check": "If cheap (<20c), test it; thematic feel may be worth it"
+    },
+    "shavronne_wrapping": {
+      "type": "Body Armour",
+      "value": "High ES + chaos damage cannot bypass",
+      "synergy": "IF CRIMSON POWER ALLOCATED",
+      "decision": "Only if Crimson Power node is taken (ES → extra life). Otherwise, skip.",
+      "es_to_life": "ES converts to extra maximum life via Crimson Power ascendancy"
+    },
+    "kaom_heart": {
+      "type": "Body Armour",
+      "value": "Huge life roll + no gem sockets",
+      "synergy": "PURE DAMAGE (life → Gore Spike)",
+      "tradeoff": "Lose gem flexibility; 6L Hexblast must be elsewhere or unlinked",
+      "use_case": "Late endgame if 6L is solved elsewhere; early/mid typically not worth"
+    },
+    "crown_of_eyes": {
+      "type": "Helmet",
+      "value": "Spell damage scaled by crit chance",
+      "synergy": "IF CRIT-HEAVY BUILD",
+      "decision_rule": "Run DPS calc (with + without); rare helmet often wins if pure DPS"
+    }
+  },
+  "resistances_cap_strategy": {
+    "act_1_2": {
+      "target": "30%+ (soft cap; acts are forgiving)",
+      "source": "Any rare gear"
+    },
+    "act_3": {
+      "target": "60%+ (work toward 75%)",
+      "source": "Rares + uniques (if high res)"
+    },
+    "early_maps": {
+      "target": "75%+ CAPPED (mandatory; one-shot prevention)",
+      "strategy": "Cap all three (fire/cold/lightning) before progressing tier difficulty"
+    },
+    "chaos_resistance": {
+      "notes": "0-20% acceptable; 30%+ comfort (melee-range pickup)",
+      "not_mandatory": "Unlike fire/cold/lightning; passive defense mainly"
+    },
+    "res_cap_priority": "Cap resistances BEFORE pushing damage; one-shots kill faster than low DPS"
+  },
+  "life_floor_targets": {
+    "acts_1_2": "80-100",
+    "act_3": "250-300",
+    "early_maps": "600-800",
+    "mid_maps": "1000-1200",
+    "late_maps": "1400-1600",
+    "endgame": "1800-2200+"
+  },
+  "item_rarity_vs_price": {
+    "early_budget": {
+      "level": "Acts 1-3",
+      "source": "Vendor rares + rare drops",
+      "unique_budget": "0-5c (experiment with thematic uniques)"
+    },
+    "mid_budget": {
+      "level": "Early maps (tier 1-6)",
+      "source": "Trade site rares (5-100c per slot)",
+      "unique_budget": "20-200c (selective uniques)"
+    },
+    "late_budget": {
+      "level": "Late maps (tier 7-16)",
+      "source": "High-roll rares (200c-5ex per slot)",
+      "unique_budget": "Rarely efficient; rares usually win"
+    }
+  }
+}
