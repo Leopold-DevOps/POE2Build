@@ -1,0 +1,364 @@
+{
+  "build_name": "Sanguine Detonation — Optimized for Maps Tier 7-10",
+  "version": "0.5.x (July 2026)",
+  "target_level": 82,
+  "build_philosophy": "Max life triple-dip (defense + fuel + damage via Gore Spike). Aggressive crit scaling post-15% base (Sunder). Despair curse effect as hidden multiplier. Flask recovery replaces leech post-0.5 nerfs.",
+
+  "character": {
+    "class": "Witch",
+    "ascendancy": "Blood Mage",
+    "life_total": 1650,
+    "life_unreserved": 1650,
+    "attributes": {
+      "strength": 80,
+      "dexterity": 65,
+      "intelligence": 165
+    }
+  },
+
+  "ascendancy_allocation": {
+    "node_1_2": "Sunder the Flesh",
+    "node_1_2_effect": "Spell Critical Strike Chance: 15% (base for all spells)",
+    "node_3_4": "Gore Spike",
+    "node_3_4_effect": "Gain X% of Critical Damage as Extra Damage per X of Maximum Life",
+    "node_5_6": "Whispers of the Flesh",
+    "node_5_6_effect": "Enemies you curse have X% of Life Reserved. Cursed enemies cannot regenerate.",
+    "node_7_8": "Crimson Power",
+    "node_7_8_effect": "Energy Shield on Body Armour counts as Extra Maximum Life"
+  },
+
+  "skill_gems": {
+    "hexblast_setup": {
+      "gem": "Hexblast",
+      "level": 20,
+      "quality": 0,
+      "supports": [
+        {
+          "gem": "Spell Critical Strike Chance Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Multiplies 15% base crit; first link mandatory"
+        },
+        {
+          "gem": "Critical Strike Multiplier Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Scales crit damage; stacks with Gore Spike"
+        },
+        {
+          "gem": "Increased Area of Effect Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Widens curse + explosion chain; pack clear"
+        },
+        {
+          "gem": "Faster Casting Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Accelerates two-beat rhythm (curse → blast)"
+        },
+        {
+          "gem": "Chaos Damage Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Scales Hexblast chaos damage"
+        },
+        {
+          "gem": "Controlled Destruction Support",
+          "level": 20,
+          "quality": 0,
+          "reason": "Trade crit chance for damage; patch-dependent swap"
+        }
+      ],
+      "gem_links": "6-link"
+    },
+    "despair_setup": {
+      "gem": "Despair",
+      "level": 20,
+      "quality": 0,
+      "supports": [
+        {
+          "gem": "Increased Area of Effect Support",
+          "level": 20,
+          "reason": "Curse whole pack in one cast"
+        },
+        {
+          "gem": "Curse Effect Support",
+          "level": 20,
+          "reason": "Deepens chaos res reduction (hidden multiplier)"
+        }
+      ],
+      "gem_links": "2-link",
+      "note": "Optional second variant: Despair + Curse Duration (long bosses)"
+    },
+    "movement": {
+      "gem": "Blink Arrow",
+      "level": 20,
+      "supports": [
+        "Faster Attacks Support or Second Wind (if using Second Wind)"
+      ],
+      "note": "Non-negotiable; rhythm plants feet"
+    },
+    "utility_buff": {
+      "gem": "Malevolence",
+      "level": 20,
+      "reason": "Grants flat chaos to spells (scales Hexblast high added-damage effectiveness)"
+    }
+  },
+
+  "gear_optimized": {
+    "weapon": {
+      "base_type": "Wand",
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+65% Spell Damage",
+        "+18% Spell Critical Strike Chance",
+        "+0.25 to Cast Speed",
+        "+22 to Added Chaos Damage to Spells"
+      ],
+      "estimated_rolls": {
+        "spell_damage_pct": 65,
+        "crit_chance_pct": 18,
+        "cast_speed": 0.25,
+        "flat_chaos": 22
+      },
+      "reason": "Highest damage leverage; flat chaos scales with high added-damage effectiveness"
+    },
+    "body_armour": {
+      "base_type": "Robe",
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+155 Maximum Life",
+        "+32% Fire Resistance",
+        "+28% Cold Resistance",
+        "+35% Lightning Resistance"
+      ],
+      "estimated_rolls": {
+        "max_life": 155,
+        "fire_res": 32,
+        "cold_res": 28,
+        "lightning_res": 35
+      },
+      "alternative_unique": "The Covenant (if thematic; judge vs. rare)",
+      "reason": "Life is triple-dip; resistances cap to 75%+"
+    },
+    "helmet": {
+      "base_type": "Helmet",
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+78 Maximum Life",
+        "+20% Spell Critical Strike Chance",
+        "+25% Fire Resistance",
+        "+24% Cold Resistance"
+      ],
+      "reason": "Crit chance helps floor; life + resistances"
+    },
+    "gloves": {
+      "base_type": "Gloves",
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+65 Maximum Life",
+        "+0.15 to Cast Speed",
+        "+28% Fire Resistance",
+        "+26% Cold Resistance"
+      ],
+      "reason": "Cast speed is QoL; life + resistances"
+    },
+    "boots": {
+      "base_type": "Boots",
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+30% Movement Speed",
+        "+72 Maximum Life",
+        "+22% Fire Resistance",
+        "+25% Lightning Resistance"
+      ],
+      "reason": "Movement speed NON-NEGOTIABLE; time between casts = danger zone"
+    },
+    "ring_1": {
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+48 Maximum Life",
+        "+12 to Added Chaos Damage to Spells",
+        "+18% Spell Critical Strike Chance",
+        "+24% Fire Resistance"
+      ]
+    },
+    "ring_2": {
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+52 Maximum Life",
+        "+15 to Added Chaos Damage to Spells",
+        "+45% Chaos Resistance",
+        "+22% Cold Resistance"
+      ],
+      "reason": "Chaos res bonus (melee-range remnant pickup)"
+    },
+    "amulet": {
+      "rarity": "Rare",
+      "rare_example_mods": [
+        "+58 Maximum Life",
+        "+16 to Added Chaos Damage to Spells",
+        "+38% Critical Strike Multiplier",
+        "+28% Lightning Resistance"
+      ],
+      "reason": "Crit multiplier scales exponentially; life + damage"
+    },
+    "flask_1": {
+      "type": "Life Flask",
+      "mods": [
+        "Recovery Rate +40%",
+        "Charges Gained +2",
+        "Instant recovery when depleted"
+      ],
+      "reason": "Life-spend class makes flask tier-0"
+    },
+    "flask_2": {
+      "type": "Utility (Quicksilver or Defense)",
+      "recommendation": "Quicksilver (movement) or Granite Stone Skin (defense)"
+    }
+  },
+
+  "passive_tree_allocation": {
+    "total_points_allocated": 82,
+    "cluster_summary": {
+      "life_wheels": [
+        "Scion life wheel: +55% maximum life",
+        "Ranger life wheel: +48% maximum life",
+        "Witch life wheel: +52% maximum life"
+      ],
+      "crit_clusters": [
+        "Spell crit cluster (left): +38% spell critical strike chance",
+        "Crit multiplier cluster (right): +82% critical damage"
+      ],
+      "damage_clusters": [
+        "Spell damage (Witch): +48% spell damage",
+        "Chaos damage: +32% chaos damage"
+      ],
+      "defensive_clusters": [
+        "Flask recovery cluster: +48% flask recovery rate",
+        "Curse effect: +28% curse effect"
+      ],
+      "jewel_sockets": 2
+    },
+    "key_notables": [
+      "Sanguine Crest (life + spell damage synergy)",
+      "Cruel Preparation (life conversion, if available)",
+      "Efficient Frost (elemental damage, pathing bonus)"
+    ]
+  },
+
+  "estimated_stats": {
+    "offence": {
+      "hexblast_base_damage": 650,
+      "spell_damage_multiplier": "2.15× (65% spell + 80% crit multiplier + Gore Spike + supports)",
+      "hexblast_hit_damage": "~1400 per hit (non-crit)",
+      "hexblast_crit_damage": "~3500 per hit (with crit multiplier)",
+      "crit_chance_total": "52% (15% base + 20% ascendancy pre-calculation + 18% gear)",
+      "crit_multiplier_total": "182% (support + gore spike + gear)",
+      "cast_speed": "1.1 casts/sec (0.25 gear + 0.15 gloves + tree)",
+      "estimated_dps_pack_clear": "15,000-20,000 (accounting for chain × avg 6-7 explosions)",
+      "estimated_dps_single_target": "4,000-5,000 (single Hexblast + Despair multiplier)",
+      "curse_effect_total": "28% (tree + gear)",
+      "despair_multiplier": "~2.5-3.0× (base −30% res, deepened by +28% curse effect, reduction past 0% compounds)"
+    },
+    "defence": {
+      "maximum_life": 1650,
+      "life_unreserved": 1650,
+      "resistances": {
+        "fire": 75,
+        "cold": 75,
+        "lightning": 75
+      },
+      "chaos_resistance": 45,
+      "energy_shield": 280,
+      "energy_shield_as_extra_life": 280,
+      "total_effective_life": "1930 (1650 + 280 ES via Crimson Power)",
+      "life_recovery": "Flask recovery rate +48% (fast sustain)",
+      "flask_lifestealing": "~1000 HP + instant when depleted (tier-0 recovery"
+    },
+    "attributes": {
+      "strength_requirement": 80,
+      "dexterity_requirement": 65,
+      "intelligence_requirement": 165
+    }
+  },
+
+  "damage_calculation_breakdown": {
+    "phase": "Maps Tier 7-10",
+    "enemy_assumptions": {
+      "base_chaos_res": 0,
+      "no_curse": false,
+      "despair_applied": true,
+      "pack_size": "3-5 enemies (chain jumps)"
+    },
+    "per_hit_calc": {
+      "hexblast_base": 650,
+      "spell_damage_65pct": "+422.5",
+      "support_gems": "+200 (aggregate)",
+      "flat_chaos_22": "+22",
+      "subtotal_before_crit": 1294.5,
+      "crit_hit": 3234,
+      "despair_multiplier_2_7x": "~8730 (single crit hit into Despair enemy)",
+      "chain_avg_6_explosions": "~52380 (6 × 8730)",
+      "note": "Numbers are estimators; actual PoB2 numbers may vary ±10-15%"
+    },
+    "breakpoint": "At 1650 life, Gore Spike contributes ~110-140% crit damage bonus (patch-dependent). Combined with multiplier support (38%) + tree (82%), total crit multiplier hits ~180-190%."
+  },
+
+  "playstyle_notes": {
+    "rotation": "Despair → Hexblast → move → repeat (two-beat rhythm)",
+    "pack_clear": "Despair hits whole pack; Hexblast chains up to 10 explosions per patch",
+    "single_target": "Despair → Hexblast → Hexblast (if mana allows); optional second Despair (duration variant) for long fights",
+    "survivability": "Life reservoir absorbs several casts + one hit. Flask is primary sustain layer (50% HP recovery). Remnants overflow life for Gore Spike damage burst. Time between casts is danger zone—movement speed critical.",
+    "patch_sensitivity": "Numbers (gem values, supports, explosion caps) shift per patch. Reasoning (why life scales, why curse matters, why crit is the multiplier) is stable."
+  },
+
+  "upgrade_path": {
+    "current_tier": "Maps 7-10 (mid-game)",
+    "next_upgrade_targets": [
+      {
+        "target": "Weapon → 70%+ spell damage + 25+ flat chaos",
+        "impact": "+10-15% DPS"
+      },
+      {
+        "target": "Body armour → higher life roll (170+) if ES upgrades max",
+        "impact": "+3-5% effective HP via Gore Spike"
+      },
+      {
+        "target": "Crit multiplier jewel (2-3 sockets allocated)",
+        "impact": "+8-12% DPS"
+      },
+      {
+        "target": "Amulet → +50%+ crit multiplier if available",
+        "impact": "+5-8% DPS"
+      }
+    ],
+    "late_endgame_pivots": [
+      "Gem corruption: +1 level Hexblast (gemstone) = ~5% DPS",
+      "Gem quality: +1-2 quality supports = minor DPS",
+      "Unique swap: The Covenant if ES rolls are exceptional (judge vs. rare)"
+    ]
+  },
+
+  "pob2_generation_instructions": {
+    "required_for_upload": [
+      "Path of Building 2 (PoB2) export code (base64 string)",
+      "Character name + level 82 Witch",
+      "Full skill gem setup (6-link Hexblast + 2-link Despair + supports)",
+      "Gear (rares as specified above, or substitutes)",
+      "Passive tree allocation (82 points, clusters as described)",
+      "Ascendancy: Sunder the Flesh, Gore Spike, Whispers of the Flesh, Crimson Power"
+    ],
+    "manual_input_path": "If PoB2 code unavailable, manually input in Path of Building 2: Witch → Blood Mage → fill tree + gems as above → export → upload to pobb.in",
+    "note": "This spec is designed to be PoB2-compatible and pobb.in-shareable once exported."
+  },
+
+  "research_references": [
+    "synergistic-gear.json: synergy pillars validated",
+    "damage-scaling-analysis.json: DPS breakpoints + phase priorities",
+    "gear-checklist.json: must-have slots + defensive floors",
+    "mods-priority.json: S/A/B tier mods per slot",
+    "leveling-progression.json: ascendancy allocation order"
+  ]
+}
