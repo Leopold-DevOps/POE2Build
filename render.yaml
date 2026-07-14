@@ -1,0 +1,12 @@
+# Render Blueprint — deploys this repo as a free static site.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: poe2build
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=300

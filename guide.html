@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanguine Detonation — A Hexblast Blood Mage Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-bg:#0c0a0d;          /* near-black plum */
+    --ink-surface:#141016;     /* raised panels */
+    --ink-deep:#090709;        /* recessed */
+    --blood:#a01e26;           /* dark blood red — life, blood mage */
+    --blood-bright:#d4353f;    /* highlights */
+    --hex:#7a55a8;             /* chaos purple — curses, hexes */
+    --hex-bright:#a07fd0;
+    --gold:#c2a15e;            /* aged gold — PoE accents, headings */
+    --bone:#e9dfd1;            /* body text */
+    --bone-dim:#a2947f;        /* secondary text */
+    --line:#2a2230;
+    --warn:#c78a3b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
+  body{
+    background:var(--ink-bg);
+    color:var(--bone);
+    font-family:'Alegreya', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  /* Ambient vignette + faint texture */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(160,30,38,.10), transparent 60%),
+      radial-gradient(900px 500px at 85% 110%, rgba(122,85,168,.08), transparent 60%);
+  }
+  .frame{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* ============ HERO ============ */
+  header.hero{
+    padding:72px 0 48px;
+    border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .hero .rune-line{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    color:var(--gold);letter-spacing:.35em;text-transform:uppercase;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+  }
+  .hero .rune-line::before,.hero .rune-line::after{
+    content:"";height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold));
+  }
+  .hero .rune-line::after{background:linear-gradient(90deg,var(--gold),transparent);}
+  h1{
+    font-family:'Cinzel',serif;font-weight:700;
+    font-size:clamp(34px,6vw,64px);
+    line-height:1.08;margin:22px 0 10px;
+    color:var(--bone);
+  }
+  h1 .blood-word{color:var(--blood-bright);}
+  h1 .hex-word{color:var(--hex-bright);}
+  .hero .sub{
+    color:var(--bone-dim);font-size:19px;max-width:640px;margin:0 auto;
+    font-style:italic;
+  }
+  .patch-banner{
+    display:inline-flex;gap:18px;flex-wrap:wrap;justify-content:center;
+    margin-top:30px;padding:10px 22px;
+    border:1px solid var(--line);border-radius:2px;
+    background:var(--ink-surface);
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--bone-dim);
+  }
+  .patch-banner b{color:var(--gold);font-weight:500;}
+
+  /* ============ NAV ============ */
+  nav.toc{
+    position:sticky;top:0;z-index:5;
+    background:rgba(12,10,13,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;white-space:nowrap;
+    padding:0 24px;
+  }
+  nav.toc .inner{max-width:1180px;margin:0 auto;display:flex;gap:4px;}
+  nav.toc a{
+    color:var(--bone-dim);text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    padding:13px 12px;letter-spacing:.04em;
+    border-bottom:2px solid transparent;
+  }
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--gold);border-bottom-color:var(--gold);outline:none;}
+
+  /* ============ SECTIONS ============ */
+  section{padding:64px 0 24px;border-bottom:1px solid var(--line);}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--blood-bright);margin-bottom:10px;
+  }
+  .kicker.hexk{color:var(--hex-bright);}
+  h2{
+    font-family:'Cinzel',serif;font-weight:600;font-size:clamp(24px,3.4vw,34px);
+    color:var(--bone);margin-bottom:22px;
+  }
+  h3{
+    font-family:'Cinzel',serif;font-weight:600;font-size:19px;
+    color:var(--gold);margin:34px 0 12px;
+  }
+  p{margin:0 0 16px;max-width:74ch;}
+  em{color:var(--bone);}
+  strong{color:var(--bone);font-weight:700;}
+  .lede{font-size:20px;color:var(--bone);max-width:70ch;}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media(max-width:820px){.cols{grid-template-columns:1fr;}}
+
+  /* Concept boxes — purple = hex/mechanic, red = blood mage, gold warn = patch-sensitive */
+  .box{
+    border:1px solid var(--line);border-left:3px solid var(--hex);
+    background:var(--ink-surface);
+    padding:18px 22px;margin:22px 0;border-radius:2px;
+    max-width:78ch;
+  }
+  .box .box-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--hex-bright);margin-bottom:8px;
+  }
+  .box.blood{border-left-color:var(--blood);}
+  .box.blood .box-label{color:var(--blood-bright);}
+  .box.patch{border-left-color:var(--warn);}
+  .box.patch .box-label{color:var(--warn);}
+  .box p:last-child{margin-bottom:0;}
+
+  /* Stat rows */
+  .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:24px 0;}
+  .stat{
+    background:var(--ink-surface);border:1px solid var(--line);border-radius:2px;
+    padding:16px 18px;
+  }
+  .stat .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);}
+  .stat .v{font-family:'Cinzel',serif;font-size:22px;color:var(--gold);margin-top:6px;}
+  .stat .v.red{color:var(--blood-bright);}
+  .stat .v.purp{color:var(--hex-bright);}
+  .stat .d{font-size:14px;color:var(--bone-dim);margin-top:6px;line-height:1.5;}
+
+  /* Verdict pills */
+  .pill{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.15em;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:99px;
+    padding:4px 12px;margin:0 8px 8px 0;color:var(--bone-dim);
+  }
+  .pill.good{color:#8fb573;border-color:#3a4a2f;}
+  .pill.bad{color:var(--blood-bright);border-color:#4a2226;}
+
+  /* The signature: circulatory engine diagram */
+  figure.engine{margin:36px 0;}
+  figure.engine svg{width:100%;height:auto;display:block;}
+  figure.engine figcaption{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--bone-dim);
+    text-align:center;margin-top:10px;letter-spacing:.06em;
+  }
+
+  /* Ascendancy table */
+  table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15.5px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold);text-align:left;
+    padding:10px 14px;border-bottom:1px solid var(--gold);
+  }
+  td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--bone-dim);}
+  td:first-child{color:var(--bone);font-weight:500;white-space:nowrap;}
+  td .why{color:var(--bone-dim);}
+  .order{font-family:'IBM Plex Mono',monospace;color:var(--blood-bright);}
+
+  /* Gear slots */
+  .slot{
+    display:grid;grid-template-columns:150px 1fr;gap:16px;
+    padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  @media(max-width:640px){.slot{grid-template-columns:1fr;gap:4px;}}
+  .slot .name{font-family:'Cinzel',serif;color:var(--gold);font-size:16px;}
+  .slot .want{color:var(--bone-dim);font-size:15.5px;line-height:1.6;}
+  .slot .want b{color:var(--bone);font-weight:500;}
+
+  /* Loop / rotation strip */
+  .rotation{
+    display:flex;flex-wrap:wrap;gap:0;align-items:stretch;margin:26px 0;
+    border:1px solid var(--line);border-radius:2px;overflow:hidden;
+  }
+  .rotation .step{
+    flex:1 1 180px;padding:18px 20px;background:var(--ink-surface);
+    border-right:1px solid var(--line);position:relative;
+  }
+  .rotation .step:last-child{border-right:none;}
+  .rotation .n{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+    color:var(--hex-bright);text-transform:uppercase;
+  }
+  .rotation .step.r .n{color:var(--blood-bright);}
+  .rotation .t{font-family:'Cinzel',serif;color:var(--bone);font-size:17px;margin:6px 0 4px;}
+  .rotation .d{font-size:14px;color:var(--bone-dim);line-height:1.5;}
+
+  /* FAQ */
+  details{
+    border:1px solid var(--line);border-radius:2px;background:var(--ink-surface);
+    margin:12px 0;max-width:78ch;
+  }
+  summary{
+    cursor:pointer;padding:16px 20px;font-family:'Cinzel',serif;font-size:16px;color:var(--bone);
+    list-style:none;position:relative;padding-right:44px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"✛";position:absolute;right:18px;top:14px;color:var(--blood-bright);
+    transition:transform .2s ease;
+  }
+  details[open] summary::after{transform:rotate(45deg);}
+  summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+  details .body{padding:0 20px 18px;color:var(--bone-dim);}
+  details .body p{margin-bottom:12px;}
+
+  ul.clean{margin:0 0 18px 0;padding-left:0;list-style:none;max-width:74ch;}
+  ul.clean li{
+    padding:7px 0 7px 26px;position:relative;color:var(--bone-dim);
+  }
+  ul.clean li::before{content:"◆";position:absolute;left:2px;top:8px;font-size:10px;color:var(--blood);}
+  ul.clean.hexlist li::before{color:var(--hex);}
+  ul.clean li b{color:var(--bone);font-weight:500;}
+
+  footer{
+    padding:48px 0 64px;text-align:center;color:var(--bone-dim);
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+  }
+  footer .sig{color:var(--gold);margin-bottom:6px;font-size:13px;}
+  a.inline{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div class="frame">
+<header class="hero">
+  <div class="rune-line">Witch · Blood Mage · Chaos Detonation</div>
+  <h1>SANGUINE<br><span class="blood-word">DETONATION</span></h1>
+  <p class="sub">A Hexblast Blood Mage designed from the mechanics up — where every drop of blood you spend comes back as damage.</p>
+  <div class="patch-banner">
+    <span>Game: <b>Path of Exile 2</b></span>
+    <span>Patch context: <b>0.5.x — July 2026</b></span>
+    <span>Author's first build — designed with first-principles analysis</span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="inner">
+    <a href="#overview">I · Overview</a>
+    <a href="#engine">II · The Engine</a>
+    <a href="#ascendancy">III · Ascendancy</a>
+    <a href="#skills">IV · Skills</a>
+    <a href="#tree">V · Passive Tree</a>
+    <a href="#gear">VI · Gear</a>
+    <a href="#leveling">VII · Leveling</a>
+    <a href="#mistakes">VIII · Mistakes & FAQ</a>
+  </div>
+</nav>
+
+<!-- ============================================================ I -->
+<section id="overview">
+  <div class="kicker">Chapter I</div>
+  <h2>Build Overview</h2>
+  <p class="lede">You are a witch who pays for her spells in blood, curses everything that moves, and then detonates those curses in chains of chaos explosions. The louder your heartbeat, the harder you hit.</p>
+
+  <p>The core of this build is a marriage of two mechanics that were, almost accidentally, made for each other. <strong>Hexblast</strong> is a chaos spell that consumes a curse on its target and explodes — but it suffers from a spellcaster's classic problem: a low base critical hit chance. <strong>Blood Mage</strong> is a Witch ascendancy whose signature node, Sunder the Flesh, sets the base critical hit chance of your spells to a flat 15% — one of the largest single-node damage transformations available to any caster. Bolt those together and Hexblast stops being a slow utility nuke and becomes a crit engine.</p>
+
+  <p>But the deeper synergy — the one this build is actually designed around — is <em>what crits do for a Blood Mage</em>. Gore Spike scales your critical damage bonus off your <strong>maximum life</strong>, including life <em>overflowing</em> above your maximum from Life Remnants. That inverts the usual caster logic: instead of life being the tax you pay for not dying, life is your primary damage stat. Every life node, every life roll on gear, every remnant you pick up is simultaneously defense and offense.</p>
+
+  <h3>How it plays</h3>
+  <div class="rotation">
+    <div class="step"><div class="n">Hex</div><div class="t">Curse the pack</div><div class="d">Cast Despair on a group. Every enemy inside is now hexed — and primed.</div></div>
+    <div class="step r"><div class="n">Blast</div><div class="t">Detonate</div><div class="d">One Hexblast on any cursed target. The detonation chains — up to 10 explosions per cast at current patch.</div></div>
+    <div class="step r"><div class="n">Bleed for it</div><div class="t">Pay in blood</div><div class="d">Sanguimancy makes every cast cost life as well as mana. You are always spending yourself.</div></div>
+    <div class="step"><div class="n">Harvest</div><div class="t">Collect remnants</div><div class="d">Kills and hits spawn Life Remnants. Walking over them refills — and overfills — your life pool, which Gore Spike converts straight into crit damage.</div></div>
+  </div>
+
+  <h3>Honest scorecard</h3>
+  <div style="margin:8px 0 18px;">
+    <span class="pill good">Huge crit ceiling</span>
+    <span class="pill good">Screen-wide pack clear</span>
+    <span class="pill good">Life doubles as damage</span>
+    <span class="pill good">Anti-regen bossing</span>
+    <span class="pill bad">Two-button rhythm, not one</span>
+    <span class="pill bad">Gear-hungry after 0.5 leech nerfs</span>
+    <span class="pill bad">Life costs punish sloppy play</span>
+  </div>
+
+  <div class="box patch">
+    <div class="box-label">Patch-sensitive</div>
+    <p>Everything in this document that is a <em>number</em> (gem values, node percentages, explosion caps) can and will shift between patches — Hexblast alone has been reworked repeatedly through early access. Everything that is <em>reasoning</em> (why life scaling works, why curse tempo matters, why crit is the multiplier of choice) survives patches. When a number here disagrees with your in-game tooltip, trust the tooltip and re-run the logic.</p>
+  </div>
+</section>
+
+<!-- ============================================================ II -->
+<section id="engine">
+  <div class="kicker hexk">Chapter II</div>
+  <h2>The Engine — Why This Works</h2>
+  <p class="lede">This is the chapter that makes it <em>your</em> build. Understand the engine, and every future patch note becomes something you can evaluate yourself instead of waiting for a guide update.</p>
+
+  <figure class="engine">
+    <svg viewBox="0 0 900 430" role="img" aria-label="Diagram of the build's damage and sustain loop: life pool feeds Gore Spike crit damage, crits feed Hexblast detonations, detonations spawn Life Remnants, remnants overflow the life pool, closing the circuit. Curses feed the detonation from outside the loop.">
+      <defs>
+        <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#a01e26"/>
+        </marker>
+        <marker id="arrP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#7a55a8"/>
+        </marker>
+      </defs>
+      <!-- circulatory loop -->
+      <ellipse cx="450" cy="215" rx="300" ry="150" fill="none" stroke="#2a2230" stroke-width="1"/>
+      <!-- nodes -->
+      <g font-family="Cinzel, serif" text-anchor="middle">
+        <!-- LIFE POOL (top) -->
+        <rect x="340" y="28" width="220" height="66" rx="2" fill="#141016" stroke="#a01e26"/>
+        <text x="450" y="55" fill="#e9dfd1" font-size="17">THE LIFE POOL</text>
+        <text x="450" y="78" fill="#a2947f" font-size="12" font-family="IBM Plex Mono, monospace">defense · fuel · damage stat</text>
+        <!-- GORE SPIKE (right) -->
+        <rect x="670" y="182" width="200" height="66" rx="2" fill="#141016" stroke="#a01e26"/>
+        <text x="770" y="209" fill="#e9dfd1" font-size="16">GORE SPIKE</text>
+        <text x="770" y="232" fill="#a2947f" font-size="12" font-family="IBM Plex Mono, monospace">crit damage per life</text>
+        <!-- HEXBLAST (bottom) -->
+        <rect x="330" y="336" width="240" height="66" rx="2" fill="#141016" stroke="#7a55a8"/>
+        <text x="450" y="363" fill="#e9dfd1" font-size="17">HEXBLAST CRITS</text>
+        <text x="450" y="386" fill="#a2947f" font-size="12" font-family="IBM Plex Mono, monospace">15% base crit · chain detonation</text>
+        <!-- REMNANTS (left) -->
+        <rect x="30" y="182" width="210" height="66" rx="2" fill="#141016" stroke="#a01e26"/>
+        <text x="135" y="209" fill="#e9dfd1" font-size="16">LIFE REMNANTS</text>
+        <text x="135" y="232" fill="#a2947f" font-size="12" font-family="IBM Plex Mono, monospace">overflow to ~150% life</text>
+        <!-- CURSE inflow -->
+        <rect x="660" y="336" width="215" height="66" rx="2" fill="#141016" stroke="#7a55a8"/>
+        <text x="767" y="363" fill="#e9dfd1" font-size="16">DESPAIR</text>
+        <text x="767" y="386" fill="#a2947f" font-size="12" font-family="IBM Plex Mono, monospace">−chaos res · the fuse</text>
+      </g>
+      <!-- arrows around loop -->
+      <path d="M572,70 C700,95 760,130 772,176" fill="none" stroke="#a01e26" stroke-width="2" marker-end="url(#arrR)"/>
+      <path d="M756,252 C700,310 630,340 578,352" fill="none" stroke="#a01e26" stroke-width="2" marker-end="url(#arrR)"/>
+      <path d="M326,352 C240,330 170,300 140,254" fill="none" stroke="#a01e26" stroke-width="2" marker-end="url(#arrR)"/>
+      <path d="M140,176 C170,120 250,84 332,66" fill="none" stroke="#a01e26" stroke-width="2" marker-end="url(#arrR)"/>
+      <!-- curse feeding the blast -->
+      <path d="M656,368 L580,368" fill="none" stroke="#7a55a8" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrP)"/>
+      <!-- arrow labels -->
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#a2947f" text-anchor="middle">
+        <text x="705" y="105">more life → bigger crits</text>
+        <text x="700" y="315">crits detonate hexes</text>
+        <text x="205" y="315">kills &amp; hits drop remnants</text>
+        <text x="200" y="105">remnants overflow the pool</text>
+      </g>
+    </svg>
+    <figcaption>The circulatory system. Blood goes out as spell costs; it returns, with interest, as overflowing life — and overflowing life is crit damage.</figcaption>
+  </figure>
+
+  <h3>Principle 1 — One stat, three jobs</h3>
+  <p>Most builds split their budget: some nodes for damage, some for defense, and the two compete. Here, <strong>maximum life triple-dips</strong>. It is your survival buffer, it is the fuel Sanguimancy spends when you cast, and through Gore Spike it is a direct multiplier on your critical damage. When one stat serves three jobs, every point of investment is worth roughly three times what it looks like on paper. This is why the passive tree in Chapter V looks more like a bruiser's tree than a caster's — that is not a compromise, it is the whole point.</p>
+
+  <h3>Principle 2 — Fix the crit floor, then multiply</h3>
+  <p>Critical hits are a multiplication problem: <em>chance × bonus damage</em>. Hexblast's native crit chance is poor, which normally makes crit investment on it a waste. Sunder the Flesh replaces that weak base with a flat 15% — meaning every "increased critical chance" modifier you take is now multiplying a big number instead of a tiny one. Once chance is respectable, Gore Spike inflates the <em>bonus</em> side using your life pool. You are attacking both halves of the multiplication with stats you wanted anyway.</p>
+
+  <div class="box">
+    <div class="box-label">Concept — Why crits beat raw damage here</div>
+    <p>A 15% base crit chance means crit modifiers on the tree and gear have somewhere to grow toward reliably critting on most casts. And because Hexblast fires in slow, heavy casts rather than a machine-gun stream, each individual hit carries a huge share of your DPS — the variance of crits matters less, and their multiplier matters more. Slow heavy hitters are the natural home of crit scaling.</p>
+  </div>
+
+  <h3>Principle 3 — Curses are "more" multipliers in disguise</h3>
+  <p>Hexblast deals chaos damage, so <strong>Despair</strong> (which lowers enemy chaos resistance) is your fuse of choice. Resistance reduction is deceptively strong: taking a boss from 30% chaos resistance to 0% doesn't add 30% damage — it multiplies your damage by roughly 1.43×, because you're recovering the portion the boss was deleting. Reduction below zero is even better. Nothing on the passive tree gives you a multiplier that cheap. This is also why the build never "wastes" a curse: Hexblast <em>requires</em> one to detonate, so your damage buff and your trigger are the same button.</p>
+
+  <h3>Principle 4 — Tempo: fresh curses hit harder</h3>
+  <p>At current patch, Hexblast's quality bonus scales with the <em>remaining duration</em> of the curse it removes. Read that carefully: it rewards you for detonating <strong>immediately</strong>, not for letting curses sit. The optimal rhythm is a tight two-beat — <em>curse, blast, curse, blast</em> — like a heartbeat. This single line of gem text defines the build's feel, and it's the kind of detail a copied build list never explains.</p>
+
+  <h3>Principle 5 — Recovery in layers, because leech got humbled</h3>
+  <p>The 0.5 patch cycle overhauled leech: no more instant recovery, and each leech instance is capped. Builds that leaned entirely on Vitality Siphon for sustain got hurt. So this design treats recovery as <strong>three independent layers</strong>, any one of which can carry a bad moment:</p>
+  <ul class="clean">
+    <li><b>Life Remnants</b> — your primary engine. They spawn on kills and periodically on hit, so they flow during mapping <em>and</em> boss fights, and they overflow your maximum.</li>
+    <li><b>The life flask</b> — deliberately kept strong. Blood Mages spend life constantly, so flask charge generation and recovery rate mods are worth more to you than to any other caster.</li>
+    <li><b>Leech</b> — now the third layer, not the first. Still worth having via Vitality Siphon later, but sized as a supplement.</li>
+  </ul>
+
+  <div class="box blood">
+    <div class="box-label">Blood Mage — the overflow trick</div>
+    <p>Life Remnants can push you <em>above</em> maximum life (up to roughly 150% of it). Because Gore Spike counts that overflow, entering a boss phase topped-up-past-full is a genuine damage cooldown. Before a big damage window, sweep up remnants deliberately — you are not just healing, you are charging your crits.</p>
+  </div>
+</section>
+
+<!-- ============================================================ III -->
+<section id="ascendancy">
+  <div class="kicker">Chapter III</div>
+  <h2>Ascendancy Path</h2>
+  <p class="lede">Eight points, taken in the order that solves your biggest current problem — not the order a spreadsheet says maximizes level-90 DPS.</p>
+
+  <table>
+    <thead><tr><th>Order</th><th>Node</th><th>Why, in this build's logic</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="order">Foundation</span></td>
+        <td>Sanguimancy</td>
+        <td class="why">Free to allocate at current patch. Grants Life Remnants and gives your skills a life cost equal to their mana cost. This is the identity node — the loop in Chapter II does not exist without it. Take it the moment you ascend.</td>
+      </tr>
+      <tr>
+        <td><span class="order">Points 1–2</span></td>
+        <td>Sunder the Flesh</td>
+        <td class="why">15% base spell crit. The single largest transformation available to Hexblast, and it makes every crit node you take afterward worth taking. Damage first, because early on your life costs are small and dying to a life pool problem is rare.</td>
+      </tr>
+      <tr>
+        <td><span class="order">Points 3–4</span></td>
+        <td>Gore Spike</td>
+        <td class="why">Crit damage scaled by your life. On its own it's good; after Sunder the Flesh it's a multiplier on a multiplier. From here on, the passive tree's life wheel purchases are damage purchases.</td>
+      </tr>
+      <tr>
+        <td><span class="order">Points 5–6</span></td>
+        <td>Whispers of the Flesh</td>
+        <td class="why">The pick that makes this design distinct. Enemies you curse have a chunk of life reserved — effectively a sizeable "more damage" multiplier against <em>every</em> target, because your rotation curses everything before it dies. And cursed targets lose their life regeneration entirely, which quietly deletes a whole class of annoying regenerating rares and boss recovery phases. A pure-crit template undervalues this; a curse-detonation build gets 100% uptime on it for free.</td>
+      </tr>
+      <tr>
+        <td><span class="order">Points 7–8</span></td>
+        <td>Crimson Power <em>or</em> Vitality Siphon</td>
+        <td class="why"><b>Crimson Power</b> (energy shield on your body armour counts as extra maximum life) if your gear budget is growing — it turns the biggest ES slot in the game into a life slot, feeding Gore Spike. <b>Vitality Siphon</b> (spell leech) if you're still feeling squishy and want the third recovery layer online. Post-0.5, I lean Crimson Power: leech was demoted, and the build's philosophy is that life <em>is</em> damage.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box patch">
+    <div class="box-label">Patch-sensitive</div>
+    <p>Blood Mage nodes have been renamed, reordered, and rebalanced multiple times across early access (Sanguimancy went from mandatory-and-costly to free; remnants went from crit-triggered to hit-triggered). Verify node names and values on your in-game tree — but the <em>ordering logic</em> above (identity → crit floor → crit ceiling → curse multiplier → life conversion) holds regardless of exact numbers.</p>
+  </div>
+</section>
+
+<!-- ============================================================ IV -->
+<section id="skills">
+  <div class="kicker hexk">Chapter IV</div>
+  <h2>Skill Gems & Supports</h2>
+  <p class="lede">Two buttons carry the build. Everything else exists to make those two buttons safer, faster, or bigger.</p>
+
+  <h3>Primary — Hexblast, the detonation</h3>
+  <p>Hexblast unlocks around character level 41 (a level 11 uncut skill gem). Until then you level with a different chaos core — see Chapter VII. Once it's online, support it toward one goal: <strong>the biggest possible single crit</strong>, because your explosion chain copies whatever your hit was.</p>
+  <ul class="clean hexlist">
+    <li><b>Crit chance support</b> — first slot, always. It multiplies against the 15% base from Sunder the Flesh.</li>
+    <li><b>Crit damage / heavier-hit support</b> — the second half of the crit multiplication.</li>
+    <li><b>Area of effect support</b> — grows each explosion in the chain; on a 10-explosion cap, AoE is effectively pack-wide overlap.</li>
+    <li><b>Cast speed support</b> — Hexblast is a slow, weighty cast, and your rhythm is two spells per cycle. Cast speed compresses the whole heartbeat, which is both damage and safety.</li>
+    <li><b>Fifth slot: flexible</b> — chaos damage, exposure/penetration effects, or a defensive utility if a boss is punishing your cast animation.</li>
+  </ul>
+
+  <div class="box patch">
+    <div class="box-label">Patch-sensitive</div>
+    <p>Support gem names and numbers move every major patch, so this list is written as <em>roles</em> rather than a fixed six-link string. In-game, sort supports by tag (Critical, Area, Speed, Chaos) and slot the strongest of each role. If two candidates compete, favor the one whose bonus is a "more" multiplier over an "increased" one.</p>
+  </div>
+
+  <h3>Secondary — Despair, the fuse</h3>
+  <p>Your curse of choice for damage: it lowers chaos resistance, which Chapter II established is the cheapest multiplier you can buy. Support it for <strong>area of effect</strong> (curse the whole pack in one cast — the explosion chain needs multiple hexed targets to jump between) and <strong>curse effect</strong> (deeper resistance reduction). Since patch 0.2, Hexblast cannot lean on aura-style curse application — the manual two-beat is the intended design, so invest in making the curse cast feel good rather than trying to automate it away.</p>
+
+  <div class="box">
+    <div class="box-label">Concept — the defensive swap</div>
+    <p>Because your damage trigger is "any hex," you own a free defensive mode: swap Despair for <b>Enfeeble</b> (enemies deal less damage) or <b>Temporal Chains</b> (enemies slowed) in content that outpaces your gear. You lose the resistance multiplier but keep the full detonation loop. Very few builds can change their defensive profile by swapping one gem; curse-detonation builds can.</p>
+  </div>
+
+  <h3>The supporting cast</h3>
+  <ul class="clean">
+    <li><b>A movement/repositioning skill</b> — non-negotiable. Your cast rhythm plants your feet; blink out between beats.</li>
+    <li><b>A spirit buff for damage or defense</b> — whatever persistent buff your spirit budget affords; prioritize anything that adds flat damage to spells (it scales with Hexblast's high added-damage effectiveness) or shores up life.</li>
+    <li><b>A single-target curse setup for bosses</b> — same Despair, but you can keep a second, differently-supported copy (curse effect + duration) for long fights if your sockets allow.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ V -->
+<section id="tree">
+  <div class="kicker">Chapter V</div>
+  <h2>Passive Tree Priorities</h2>
+  <p class="lede">No node-by-node list here — that would be somebody else's homework, and it would be stale in one patch. Instead: the shopping list, in priority order, that lets you path it yourself on the live tree.</p>
+
+  <div class="statgrid">
+    <div class="stat"><div class="k">Priority 1</div><div class="v red">Maximum Life %</div><div class="d">The triple-dip stat. Take life wheels a bruiser would take. Target: enough that a big map hit takes under half your pool.</div></div>
+    <div class="stat"><div class="k">Priority 2</div><div class="v">Spell Crit Chance</div><div class="d">Multiplies the 15% base. Take these until crits feel routine, then stop — chance has diminishing returns near the cap.</div></div>
+    <div class="stat"><div class="k">Priority 3</div><div class="v">Crit Damage Bonus</div><div class="d">Stacks with Gore Spike. Once chance is respectable, every point here is pure multiplication.</div></div>
+    <div class="stat"><div class="k">Priority 4</div><div class="v purp">Chaos / Spell Damage</div><div class="d">Your bread-and-butter "increased" nodes. Good value early, diluted later — front-load them, respec out if crowded.</div></div>
+    <div class="stat"><div class="k">Priority 5</div><div class="v purp">Curse Effect & AoE</div><div class="d">Curse effect deepens Despair's resistance cut (a hidden more-multiplier); AoE widens both the curse and the explosion chain.</div></div>
+    <div class="stat"><div class="k">Priority 6</div><div class="v red">Life Recovery & Flasks</div><div class="d">Flask charge gain, recovery rate, remnant-adjacent effects. This is the layer that replaced leech after 0.5 — do not skip it.</div></div>
+  </div>
+
+  <h3>How to path like a designer</h3>
+  <p>When two routes cost the same points, prefer the one passing through life. When a jewel socket is one point off-path, take it — jewels are how you retune the build per patch without repathing. Cast speed is your quality-of-life stat: sprinkle it in whenever a node is cheap, because it accelerates the entire two-beat rhythm rather than just one spell.</p>
+
+  <div class="box blood">
+    <div class="box-label">Blood Mage — the budget rule</div>
+    <p>A useful self-check as you level: your unreserved life should always comfortably absorb <em>several consecutive casts plus one nasty hit</em>. If casting twice while getting clipped by a boss slam would kill you, you have over-bought damage. Sell some crit, buy some life — remember that on this build, that purchase is barely even a damage loss.</p>
+  </div>
+</section>
+
+<!-- ============================================================ VI -->
+<section id="gear">
+  <div class="kicker">Chapter VI</div>
+  <h2>Gear & Stat Priorities</h2>
+  <p class="lede">Shop like the engine, not like a generic caster. Life first on every slot, crit on the slots that can roll it, and one deliberately excellent flask.</p>
+
+  <div class="slot"><div class="name">Weapon / Focus</div><div class="want"><b>Spell damage, spell crit chance, cast speed, flat chaos damage to spells.</b> Hexblast's added-damage effectiveness is high, so flat damage rolls punch above their weight here. This slot is your biggest raw damage lever.</div></div>
+  <div class="slot"><div class="name">Body Armour</div><div class="want"><b>Early:</b> maximum life and resistances. <b>With Crimson Power allocated:</b> the highest energy shield roll you can afford, because it converts into extra maximum life — this is the slot where the ascendancy choice reshapes your shopping. The unique robe <b>The Covenant</b> is thematically on-build (it grants Life Remnants and life-cost casting) but partially redundant with your ascendancy; judge it by its raw ES/life against your rare options.</div></div>
+  <div class="slot"><div class="name">Helmet · Gloves · Boots</div><div class="want"><b>Life, resistances, attributes.</b> Boots want movement speed above almost everything — your rhythm plants your feet, so the time between casts is when you live or die. Gloves can carry cast speed.</div></div>
+  <div class="slot"><div class="name">Rings & Amulet</div><div class="want"><b>Life, flat chaos to spells, crit chance/bonus, resistances, and chaos resistance for yourself.</b> Chaos res is doubly relevant: you fight in melee-adjacent range more than most casters because of remnant pickup.</div></div>
+  <div class="slot"><div class="name">Life Flask</div><div class="want">Treat this slot as gear, not an afterthought. <b>Recovery rate, charge generation, instant-recovery-when-low style mods.</b> You are the class that spends life on purpose; your flask is a weapon system.</div></div>
+  <div class="slot"><div class="name">Jewels</div><div class="want"><b>Life % + crit multi</b> is the dream combination — both halves feed Gore Spike's math. Jewels are also your patch-insurance: when numbers shift, re-rolling jewels is cheaper than re-pathing trees.</div></div>
+
+  <div class="box patch">
+    <div class="box-label">Patch-sensitive</div>
+    <p>Unique item recommendations age fastest of all build content — items get reworked, and the trade economy revalues them every league. The rare-item stat priorities above are the durable part. Before buying any unique, ask: does it feed the loop (life, crit, curse, remnants)? If not, a well-rolled rare is probably better.</p>
+  </div>
+</section>
+
+<!-- ============================================================ VII -->
+<section id="leveling">
+  <div class="kicker hexk">Chapter VII</div>
+  <h2>Leveling Roadmap</h2>
+  <p class="lede">Hexblast arrives at level 41. The plan before that: level with the chaos toolkit that shares your tree, so the switch costs nothing.</p>
+
+  <h3>Acts 1–2 · The apprentice (levels 1–~25)</h3>
+  <p>Level as a standard chaos witch: <strong>Essence Drain + Contagion</strong> (or the strongest chaos damage-over-time pair available at your patch) is the classic engine — Contagion spreads your damage across packs, which teaches you the same "prime the group, then trigger it" instinct Hexblast will demand later. Path your tree toward the life and chaos/spell damage clusters you'll want permanently; nothing you take for this phase is wasted.</p>
+  <p>Complete your first ascendancy trial in Act 2 the moment it's reasonable. Take <strong>Sanguimancy</strong> and start living with life costs early — the habit of watching your life orb while casting is the build's core motor skill, and it's better learned on small numbers.</p>
+
+  <h3>Act 3 → level 41 · The initiate</h3>
+  <p>Pick up <strong>Despair</strong> as soon as it's available and weave it into your rotation ahead of your damage — you're rehearsing the two-beat before the blast exists. Second ascendancy: <strong>Sunder the Flesh</strong>. Your DoT leveling core doesn't crit much, so you'll feel this less now than at 41 — that's fine, it's pre-investment.</p>
+
+  <h3>Level 41 · Ignition</h3>
+  <p>Engrave Hexblast from a level 11 uncut gem (you need roughly 95 intelligence — check you're on track around level 38). Slot crit chance and AoE supports first. The moment it's socketed, your rotation becomes the real one: <em>Despair → Hexblast → move → repeat</em>. Expect an adjustment day: the rhythm is slower per cast but far heavier per hit than DoT leveling.</p>
+
+  <h3>Maps · The blood mage in full</h3>
+  <ul class="clean">
+    <li><b>Third and fourth ascendancy trials:</b> Gore Spike, then Whispers of the Flesh, per Chapter III.</li>
+    <li><b>Gear passes:</b> after each trial, do a shopping pass on the slots in Chapter VI — the ascendancy nodes change what your gear is worth (Crimson Power especially).</li>
+    <li><b>Difficulty tuning:</b> if maps start hurting, swap Despair for Enfeeble before touching your tree. Curse-swapping is your cheapest difficulty dial.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ VIII -->
+<section id="mistakes">
+  <div class="kicker">Chapter VIII</div>
+  <h2>Common Mistakes & FAQ</h2>
+  <p class="lede">Every one of these is a mistake the engine predicts. If you understand Chapter II, none of them will surprise you.</p>
+
+  <details>
+    <summary>I cast Hexblast and it barely did anything</summary>
+    <div class="body"><p>Almost always: the target wasn't cursed. Hexblast without a hex is a fraction of the skill — the curse is not a buff, it is the <em>ammunition</em>. Retrain the two-beat: the curse cast always comes first, every cycle, no exceptions. If you find yourself skipping it on weak packs, that's actually fine — but never skip it on anything you care about killing.</p></div>
+  </details>
+
+  <details>
+    <summary>I keep killing myself with my own casts</summary>
+    <div class="body"><p>Three checks, in order. First: are you casting while already low, without remnants on the ground? The life cost is a fixed tax — pay it from a full wallet. Second: is your flask actually good, or is it the one you found in Act 2? Chapter VI says treat it as gear. Third: have you over-leveled your gem relative to your life pool? A higher-level gem costs more life; sometimes running the gem one level lower for a while is the correct, unglamorous fix.</p></div>
+  </details>
+
+  <details>
+    <summary>Why not just play energy shield like other witches?</summary>
+    <div class="body"><p>Because the ascendancy pays you to bleed. Gore Spike reads your life, Sanguimancy spends your life, remnants refill your life — an ES-primary Blood Mage is fighting her own class. The one place ES enters this build is <em>through</em> Crimson Power, where your body armour's ES is converted into more life. The engine always routes back to blood.</p></div>
+  </details>
+
+  <details>
+    <summary>Should I wait for the curse to tick down before detonating?</summary>
+    <div class="body"><p>No — the opposite. At current patch, quality on Hexblast rewards the <em>remaining</em> duration of the curse it consumes. Fresh curse, immediate blast. If you learned Hexblast intuitions from the first game or old patch notes, this is the one to unlearn.</p></div>
+  </details>
+
+  <details>
+    <summary>My single-target feels weak on bosses</summary>
+    <div class="body"><p>Bosses are where the multipliers earn their keep, so audit them: Is Despair actually landing and staying on the boss (bosses can shrug curse duration)? Is Whispers of the Flesh allocated — its life reservation and regen-shutdown are disproportionately a bossing tool? Are you walking over remnants before your damage windows to enter them overflowing (Chapter II's overflow trick)? Fix those three before buying gear.</p></div>
+  </details>
+
+  <details>
+    <summary>How do I know if a patch broke or buffed this build?</summary>
+    <div class="body"><p>Read patch notes against the loop, not against the numbers. Ask four questions: Did the crit floor move (Sunder the Flesh)? Did life-to-damage conversion move (Gore Spike)? Did remnant generation or overflow move (Sanguimancy)? Did curse application or Hexblast's detonation rules move? If all four survive, the build survives — the numbers just resize. If one breaks, Chapter II tells you which replacement mechanic to hunt for. That's the entire point of understanding the engine instead of copying a list.</p></div>
+  </details>
+
+  <details>
+    <summary>Is this build actually meta?</summary>
+    <div class="body"><p>Honest answer: at the current patch, Blood Mage sits mid-tier in community rankings — the 0.5 leech changes made it more gear-dependent than the top league starters. But this build was never designed to be a tier-list clone; it's designed so that its power comes from a loop you understand and can re-tune every patch. Mid-tier with mastery beats S-tier on autopilot, and the ceiling — overflowing life pools feeding chained crit detonations — is genuinely high once gear arrives.</p></div>
+  </details>
+
+</section>
+
+<footer>
+  <div class="sig">✛ SANGUINE DETONATION ✛</div>
+  <div>Designed from first principles · Patch context 0.5.x, July 2026 · Numbers are patch-sensitive; the reasoning is not.</div>
+</footer>
+</div>
+
+</body>
+</html>

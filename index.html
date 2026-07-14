@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanguine Detonation — PoE2 Build Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="sigil">✛</span>
+    <span class="title">SANGUINE <b>DETONATION</b></span>
+    <span class="tag">Hexblast · Blood Mage · Planner</span>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="tree" role="tab" aria-selected="true">Passive Tree</button>
+    <button class="tab" data-tab="gear" role="tab" aria-selected="false">Gear</button>
+    <button class="tab" data-tab="build" role="tab" aria-selected="false">Build Summary</button>
+    <button class="tab" data-tab="guide" role="tab" aria-selected="false">Guide</button>
+  </nav>
+</header>
+
+<!-- ==================== TREE ==================== -->
+<main id="panel-tree" class="panel active">
+  <div class="tree-toolbar">
+    <input id="tree-search" type="search" placeholder="Search nodes… (e.g. maximum life, critical)" aria-label="Search passive tree nodes">
+    <button id="btn-focus-asc" class="btn">Focus Blood Mage</button>
+    <button id="btn-focus-center" class="btn">Center Tree</button>
+    <span class="counter">Passives <b id="pt-count">0</b> · Ascendancy <b id="asc-count">0</b>/8</span>
+    <button id="btn-reset-tree" class="btn danger">Reset Tree</button>
+  </div>
+  <div class="tree-wrap">
+    <canvas id="tree-canvas" aria-label="Interactive passive skill tree. Click nodes to allocate."></canvas>
+    <div id="tree-tooltip" class="tooltip" hidden></div>
+    <div class="tree-hint">Drag to pan · Scroll to zoom · Click a node to allocate the shortest path to it · Right-click / long-press to unallocate</div>
+  </div>
+</main>
+
+<!-- ==================== GEAR ==================== -->
+<main id="panel-gear" class="panel">
+  <div class="gear-layout">
+    <section class="gear-doll" aria-label="Equipment slots">
+      <h2 class="panel-title">Simulated Inventory</h2>
+      <div class="doll-grid" id="doll-grid"><!-- slots injected --></div>
+      <h3 class="sub-title">Flasks & Charms</h3>
+      <div class="belt-grid" id="belt-grid"><!-- flask/charm slots injected --></div>
+    </section>
+    <section class="gear-editor">
+      <h2 class="panel-title" id="editor-title">Select a slot</h2>
+      <div id="editor-body" class="editor-body">
+        <p class="dim">Click any slot on the left to create or edit its item. Type one modifier per line — the planner parses common mods (life, resistances, spell damage, crit, cast speed…) and totals them in the Build Summary.</p>
+      </div>
+      <h3 class="sub-title">Parsed Totals</h3>
+      <div id="gear-totals" class="totals"></div>
+    </section>
+  </div>
+</main>
+
+<!-- ==================== BUILD SUMMARY ==================== -->
+<main id="panel-build" class="panel">
+  <div class="build-layout">
+    <section>
+      <h2 class="panel-title">Allocated Notables & Keystones</h2>
+      <div id="build-notables" class="notable-list"></div>
+    </section>
+    <section>
+      <h2 class="panel-title">Gear Totals</h2>
+      <div id="build-totals" class="totals"></div>
+      <h2 class="panel-title" style="margin-top:28px;">Share / Save</h2>
+      <p class="dim">Your build saves automatically in this browser. Use a build code to move it between devices or share it.</p>
+      <div class="share-row">
+        <button id="btn-export" class="btn">Copy Build Code</button>
+        <button id="btn-import" class="btn">Import Build Code</button>
+      </div>
+      <textarea id="share-box" class="share-box" rows="4" placeholder="Build code appears here…" aria-label="Build code"></textarea>
+    </section>
+  </div>
+</main>
+
+<!-- ==================== GUIDE ==================== -->
+<main id="panel-guide" class="panel">
+  <iframe id="guide-frame" src="guide.html" title="Sanguine Detonation build guide"></iframe>
+</main>
+
+<footer class="foot">
+  Tree data © Grinding Gear Games, via the official <a href="https://github.com/grindinggear/poe2-skilltree-export" rel="noopener">poe2-skilltree-export</a>. Fan-made planner, not affiliated with GGG.
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/tree.js"></script>
+<script src="js/gear.js"></script>
+</body>
+</html>
