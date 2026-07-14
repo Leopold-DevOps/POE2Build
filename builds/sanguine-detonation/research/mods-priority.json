@@ -1,0 +1,223 @@
+{
+  "build": "Sanguine Detonation",
+  "mod_priority_framework": {
+    "tier_0_loop_feeders": {
+      "importance": "CANNOT BUILD WITHOUT",
+      "mods": [
+        "Maximum Life +X",
+        "Maximum Life +X%",
+        "Spell Critical Strike Chance +X%",
+        "Critical Strike Multiplier +X%",
+        "Chaos Damage +X%",
+        "Added Chaos Damage",
+        "Curse Effect +X%"
+      ],
+      "reason": "These directly feed Gore Spike (life → crit damage) and Despair (curse effect → resistance reduction)"
+    },
+    "tier_1_enabling_mods": {
+      "importance": "REQUIRED FOR FUNCTIONING BUILD",
+      "mods": [
+        "Spell Damage +X%",
+        "Cast Speed +X%",
+        "Fire Resistance +X%",
+        "Cold Resistance +X%",
+        "Lightning Resistance +X%",
+        "Movement Speed +X%",
+        "Life Regeneration +X per second"
+      ],
+      "reason": "Enable the build to function: damage floor, cap resistances, QoL"
+    },
+    "tier_2_optimization_mods": {
+      "importance": "IMPROVE COMFORT/POWER",
+      "mods": [
+        "Life Leech as Extra Damage",
+        "Flask Charge Recovery +X",
+        "Flask Life Recovery Rate +X%",
+        "Energy Shield +X",
+        "Attributes",
+        "Skill Gem Level +X",
+        "Reduced Effect of Curses"
+      ],
+      "reason": "Quality-of-life and defensive layers (remnants + flask + leech stacking)"
+    }
+  },
+  "mod_tiers_by_stat": {
+    "maximum_life": {
+      "flat_tiers": {
+        "tier_1": "+40-49",
+        "tier_2": "+25-34",
+        "tier_3": "+20-24",
+        "tier_4": "+15-19"
+      },
+      "percent_tiers": {
+        "tier_1": "+6-8%",
+        "tier_2": "+5%",
+        "tier_3": "+4%"
+      },
+      "priority": "Stack relentlessly; every point is defense+fuel+damage"
+    },
+    "spell_critical_strike_chance": {
+      "tiers": {
+        "tier_1": "+20-30%",
+        "tier_2": "+15-20%",
+        "tier_3": "+10-15%"
+      },
+      "priority": "Target 50% total (15% base + tree + gear)"
+    },
+    "critical_strike_multiplier": {
+      "tiers": {
+        "tier_1": "+50-80%",
+        "tier_2": "+35-50%",
+        "tier_3": "+20-35%"
+      },
+      "priority": "Post-chance floor (50%), multiplier is pure scaling"
+    },
+    "chaos_damage": {
+      "flat_tiers": {
+        "tier_1": "+15-20",
+        "tier_2": "+10-15",
+        "tier_3": "+5-10"
+      },
+      "percent_tiers": {
+        "tier_1": "+40-60%",
+        "tier_2": "+25-40%",
+        "tier_3": "+15-25%"
+      },
+      "phase_strategy": "Early (acts): prioritize flat; Mid (maps): balance; Late (maps+): % only if ≥40"
+    },
+    "cast_speed": {
+      "tiers": {
+        "tier_1": "+0.30",
+        "tier_2": "+0.20-0.25",
+        "tier_3": "+0.10-0.20"
+      },
+      "priority": "Sprinkle in when cheap; accelerates two-beat rhythm"
+    },
+    "curse_effect": {
+      "tiers": {
+        "tier_1": "+25-40%",
+        "tier_2": "+15-25%",
+        "tier_3": "+10-15%"
+      },
+      "priority": "Mid/late game; deepens Despair resistance reduction (hidden more-multiplier)"
+    },
+    "resistances": {
+      "fire_cold_lightning": {
+        "tier_1": "+40-60% (cap at 75%)",
+        "tier_2": "+25-40%",
+        "tier_3": "+15-25%"
+      },
+      "chaos_resistance": {
+        "target": "0-20% acceptable; 30%+ comfort (melee-range remnant pickup)"
+      }
+    },
+    "movement_speed": {
+      "tiers": {
+        "tier_1": "+30% (boots)",
+        "tier_2": "+25%",
+        "tier_3": "+20%"
+      },
+      "priority": "NON-NEGOTIABLE boots affix; rhythm plants feet; time between casts = danger"
+    },
+    "flask_mods": {
+      "recovery_rate": {
+        "tier_1": "+40-50%",
+        "tier_2": "+30-40%"
+      },
+      "charge_recovery": {
+        "tier_1": "+1-2 charges",
+        "tier_2": "+1 charge"
+      },
+      "special": "Instant recovery when flask depleted or at <50% HP (highest priority)"
+    }
+  },
+  "slot_specific_mod_priority": {
+    "weapon": {
+      "s_tier": [
+        "Spell Damage +X%",
+        "Spell Critical Strike Chance +X%",
+        "Cast Speed +X%",
+        "Added Chaos Damage +X"
+      ],
+      "a_tier": [
+        "Critical Strike Multiplier +X%",
+        "Maximum Life +X"
+      ],
+      "b_tier": ["Attributes"]
+    },
+    "body_armour": {
+      "s_tier": [
+        "Maximum Life +X",
+        "Maximum Life +X%",
+        "Fire/Cold/Lightning Resistance +X% (2-3 of these)"
+      ],
+      "a_tier_no_crimson": [
+        "Energy Shield +X (minor bonus)"
+      ],
+      "a_tier_with_crimson": [
+        "Energy Shield +X (converts to extra life)"
+      ],
+      "b_tier": ["Attributes"]
+    },
+    "helmet": {
+      "s_tier": [
+        "Maximum Life +X",
+        "Resistances (fire/cold/lightning)"
+      ],
+      "a_tier": [
+        "Spell Critical Strike Chance +X%",
+        "Spell Damage +X%"
+      ],
+      "b_tier": ["Attributes", "Mana"]
+    },
+    "gloves": {
+      "s_tier": [
+        "Maximum Life +X",
+        "Resistances"
+      ],
+      "a_tier": [
+        "Cast Speed +X%",
+        "Spell Damage +X%"
+      ],
+      "b_tier": ["Attributes"]
+    },
+    "boots": {
+      "s_tier": [
+        "Movement Speed +X% (DO NOT SKIP)",
+        "Maximum Life +X",
+        "Resistances"
+      ],
+      "a_tier": [
+        "Frenzy Charge generation",
+        "Attack/Cast Speed"
+      ],
+      "b_tier": ["Attributes"]
+    },
+    "rings": {
+      "s_tier": [
+        "Maximum Life +X",
+        "Resistances",
+        "Chaos Resistance +X%"
+      ],
+      "a_tier": [
+        "Added Chaos Damage to Spells +X",
+        "Spell Critical Strike Chance +X%",
+        "Critical Strike Multiplier +X%"
+      ],
+      "b_tier": ["Spell Damage +X%", "Attributes"]
+    },
+    "amulet": {
+      "s_tier": [
+        "Maximum Life +X",
+        "Resistances"
+      ],
+      "a_tier": [
+        "Added Chaos Damage to Spells +X",
+        "Critical Strike Multiplier +X%",
+        "Spell Critical Strike Chance +X%"
+      ],
+      "b_tier": ["Spell Damage +X%", "Attributes"]
+    }
+  },
+  "ai_quick_eval": "For any item, ask: (1) Does it feed the loop (life + crit + chaos + curse)? (2) If not, does it cap a floor (resistances, attributes, movement)? (3) If neither, is it dirt-cheap or a unique synergy? Use slot_specific_mod_priority to tier candidate mods quickly."
+}

@@ -1,0 +1,219 @@
+{
+  "build": "Sanguine Detonation",
+  "build_type": "Hexblast Blood Mage - Chaos Detonation",
+  "patch": "0.5.x",
+  "synergy_pillars": {
+    "maximum_life": {
+      "reason": "Triple-dip: defense, spell cost fuel, Gore Spike crit damage",
+      "priority": "CRITICAL",
+      "stats_to_stack": ["Maximum Life %", "Flat +Life", "Life Recovery Rate"]
+    },
+    "spell_crit": {
+      "reason": "Sunder the Flesh sets 15% base; crit chance & damage scale from there",
+      "priority": "HIGH",
+      "stats_to_stack": ["Spell Critical Strike Chance %", "Critical Damage %"]
+    },
+    "chaos_damage": {
+      "reason": "Hexblast deals chaos; synergizes with Despair resistance reduction",
+      "priority": "HIGH",
+      "stats_to_stack": ["Chaos Damage %", "Added Chaos to Spells", "Added Chaos Damage"]
+    },
+    "cast_speed": {
+      "reason": "Accelerates two-beat rhythm (curse → blast); QoL multiplier",
+      "priority": "MEDIUM",
+      "stats_to_stack": ["Cast Speed %"]
+    },
+    "curse_effect": {
+      "reason": "Deepens Despair resistance cut (hidden more-multiplier)",
+      "priority": "MEDIUM",
+      "stats_to_stack": ["Curse Effect %"]
+    },
+    "flask_recovery": {
+      "reason": "Life-spend mechanic makes flask recovery critical; replaces leech post-0.5",
+      "priority": "HIGH",
+      "stats_to_stack": ["Flask Charge Recovery", "Flask Life Recovery Rate %", "Instant Recovery"]
+    },
+    "energy_shield": {
+      "reason": "Crimson Power converts ES → extra max life (damage + defense)",
+      "priority": "MEDIUM_IF_CRIMSON",
+      "stats_to_stack": ["Energy Shield", "% of Energy Shield as Extra Maximum Life"]
+    },
+    "life_regeneration": {
+      "reason": "Layer on top of flask/remnants for sustained damage",
+      "priority": "LOW_TO_MEDIUM",
+      "stats_to_stack": ["Life Regeneration", "Regeneration", "% of Life Regenerated"]
+    }
+  },
+  "gear_slot_priorities": {
+    "weapon_focus": {
+      "base_types": ["Wand", "Sceptre"],
+      "must_have": ["Spell damage", "Spell critical chance", "Cast speed", "Flat chaos to spells"],
+      "nice_to_have": ["Crit multiplier", "Critical strike chance"],
+      "example_scaling": "Hexblast added-damage effectiveness is high; flat chaos punches above weight"
+    },
+    "body_armour": {
+      "base_types": ["Robe", "Dress"],
+      "without_crimson": ["Maximum life", "Resistances"],
+      "with_crimson": ["Highest ES possible (converts to life via ascendancy)"],
+      "unique_candidates": [
+        {
+          "name": "The Covenant",
+          "reason": "Grants Life Remnants + life-cost casting; thematically on-build but partially redundant with ascendancy"
+        }
+      ]
+    },
+    "helmet_gloves_boots": {
+      "helmet": ["Max life", "Resistances", "Attributes"],
+      "gloves": ["Max life", "Resistances", "Cast speed"],
+      "boots": ["Movement speed (highest priority after life/res)", "Max life", "Resistances"],
+      "note": "Movement speed is QoL: rhythm plants feet; time between casts is when you live/die"
+    },
+    "rings_amulet": {
+      "must_have": ["Maximum life", "Chaos resistance"],
+      "high_priority": ["Flat chaos to spells", "Crit chance", "Crit damage"],
+      "secondary": ["Resistances", "Attributes", "Spell damage %"],
+      "note": "Chaos res is doubly relevant: melee-adjacent range for remnant pickup"
+    },
+    "flask": {
+      "type": "Life Flask",
+      "treat_as": "Weapon system, not afterthought",
+      "key_mods": [
+        "Recovery rate %",
+        "Charge recovery",
+        "Instant recovery when low",
+        "Reduced effect of curses (self-defense)"
+      ],
+      "note": "Life-spend class makes flask utility tier-0"
+    }
+  },
+  "unique_items_analysis": {
+    "strong_candidates": [
+      {
+        "name": "The Covenant",
+        "type": "Body Armour (Robe)",
+        "key_mods": ["Grants Life Remnants", "Skills cost life as well as mana"],
+        "synergy": "THEMATIC + REDUNDANT",
+        "reasoning": "Ascendancy already grants remnants/life-cost. Judge raw ES/life roll vs rare."
+      },
+      {
+        "name": "Shavronne's Wrapping",
+        "type": "Body Armour",
+        "key_mods": ["High energy shield", "Chaos damage cannot bypass ES"],
+        "synergy": "DEFENSIVE_CONVERSION",
+        "reasoning": "If running Crimson Power: ES converts to extra life (damage + defense)"
+      },
+      {
+        "name": "Kaom's Heart",
+        "type": "Body Armour",
+        "key_mods": ["+Maximum Life", "No gem sockets"],
+        "synergy": "PURE_DAMAGE",
+        "reasoning": "Huge life roll = huge Gore Spike scaling, but locks gem sockets"
+      }
+    ],
+    "conditional_candidates": [
+      {
+        "name": "Crown of Eyes",
+        "type": "Helmet",
+        "key_mods": ["Spell damage scaled by critical strike chance"],
+        "synergy": "SYNERGISTIC_IF_CRIT_HEAVY",
+        "reasoning": "15% base crit + heavy crit investment makes this a multiplier; validate DPS vs rare"
+      }
+    ],
+    "avoid": [
+      {
+        "reason": "ES-primary builds conflict with life-scaling pillar",
+        "example": "Most ES-focused uniques; blood mage pays to bleed, not shield"
+      }
+    ]
+  },
+  "base_items_tier_list": {
+    "weapon_focus": {
+      "S_tier": [
+        {
+          "base": "Wand",
+          "synergy": "Spell damage, attack speed (cast speed), flat chaos scaling"
+        }
+      ],
+      "A_tier": [
+        {
+          "base": "Sceptre",
+          "synergy": "Spell damage + defensive mods; decent flat chaos support"
+        }
+      ]
+    },
+    "body_armour_without_crimson": {
+      "S_tier": [
+        {
+          "base": "Robe",
+          "synergy": "Life% + resistances; no ES pressure"
+        }
+      ]
+    },
+    "body_armour_with_crimson": {
+      "S_tier": [
+        {
+          "base": "Robe",
+          "reason": "Highest ES rolls post-patch; ES converts to extra life"
+        }
+      ]
+    }
+  },
+  "mod_research": {
+    "maximum_life_mods": {
+      "priority": "CRITICAL",
+      "tiers": ["Life +40-49", "Life +25-34", "Maximum Life +6-8%"],
+      "sources": ["Body armour", "Gloves", "Boots", "Helmet", "Shields"],
+      "note": "Stack aggressively; every point is defense+fuel+damage"
+    },
+    "spell_crit_mods": {
+      "priority": "HIGH",
+      "tiers": ["Spell Crit +0.5-1%", "Spell Crit +15-30% Multiplier"],
+      "sources": ["Wands/Sceptres (base)", "Jewelry", "Amulet"],
+      "note": "Focus on multiplier after chance floor (15%) is solid"
+    },
+    "chaos_damage_mods": {
+      "priority": "HIGH",
+      "tiers": ["Chaos +30-50%", "Added Chaos +5-8", "Added Chaos +15-20% Effectiveness"],
+      "sources": ["Weapons (flat)", "Jewelry", "Passive tree"],
+      "note": "Flat > % early; % > flat mid-late"
+    },
+    "cast_speed_mods": {
+      "priority": "MEDIUM",
+      "description": "Sprinkle in whenever cheap; accelerates rhythm",
+      "sources": ["Gloves", "Amulet", "Passive tree"]
+    },
+    "curse_effect_mods": {
+      "priority": "MEDIUM",
+      "description": "Deepens Despair's resistance reduction (hidden more-multiplier)",
+      "sources": ["Passive tree", "Support gems", "Jewelry"]
+    },
+    "flask_mods": {
+      "priority": "HIGH",
+      "tiers": ["Recovery Rate +40-50%", "Charge Recovery +1-2", "Instant Recovery at Low Life"],
+      "description": "Treat flask like a weapon; it carries blood mage sustain",
+      "sources": ["Life flask unique rolls", "Passive tree"]
+    }
+  },
+  "synergy_matrix": {
+    "life_to_crit_multiplier": {
+      "stat": "Gore Spike",
+      "formula": "Crit Damage % = (Crit Multiplier + Life Pool × Scale Factor)",
+      "implication": "Every life node is a damage node post-ascendancy"
+    },
+    "curse_to_resistance": {
+      "stat": "Despair",
+      "formula": "Damage Multiplier = 1 / (1 - Resistance Reduction)",
+      "implication": "Resistance reduction (Despair + curse effect) is a hidden more-multiplier"
+    },
+    "cast_speed_to_tempo": {
+      "stat": "Curse → Hexblast rhythm",
+      "formula": "DPS ≈ (Damage per Cast) × (Casts per Second)",
+      "implication": "Cast speed is both damage and rhythm QoL"
+    }
+  },
+  "research_notes": {
+    "post_0_5_changes": "Leech was nerfed; fleet recovery now a triple-layer system (Remnants + Flask + Leech). Flask mods jumped in priority.",
+    "crimson_power_note": "If allocated: body armour ES becomes a direct damage stat via life conversion. Changes shopping priorities.",
+    "ai_annotation": "Use synergy_pillars and synergy_matrix to evaluate gear: does it feed the loop (life → crit → detonation → remnants → life)?"
+  }
+}

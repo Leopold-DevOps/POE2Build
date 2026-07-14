@@ -1,0 +1,157 @@
+{
+  "build": "Sanguine Detonation",
+  "slot_shopping_checklist": {
+    "weapon": {
+      "base": ["Wand", "Sceptre"],
+      "must_have": [
+        "Spell damage ≥ 60%",
+        "Spell crit chance ≥ 20%",
+        "Cast speed ≥ 0.2",
+        "Flat chaos damage ≥ 15"
+      ],
+      "ideal": [
+        "Crit multiplier 50-80%",
+        "Critical strike chance 25%+",
+        "Cast speed 0.3+",
+        "Flat chaos 25+"
+      ],
+      "budget_check": "Most impactful slot for damage; prioritize over boots/rings early"
+    },
+    "body_armour": {
+      "budget_stage": "early",
+      "must_have": [
+        "Maximum life ≥ 100",
+        "Resistances: fire, cold, lightning 60%+"
+      ],
+      "mid_game": [
+        "Maximum life ≥ 150",
+        "One resistance capped (75%+)"
+      ],
+      "late_game_crimson": [
+        "Energy shield ≥ 300 (if Crimson Power allocated)",
+        "Converts to extra max life via ascendancy"
+      ],
+      "late_game_non_crimson": [
+        "Maximum life ≥ 200+",
+        "All resistances capped"
+      ],
+      "unique_check": "The Covenant thematic but partially redundant; judge vs rare"
+    },
+    "helmet": {
+      "must_have": [
+        "Maximum life ≥ 60",
+        "Resistances: 2 of 3 at 30%+"
+      ],
+      "ideal": [
+        "Maximum life ≥ 80",
+        "Critical strike chance 15-20%",
+        "All resistances 50%+"
+      ],
+      "note": "Lower priority than weapon/body; stack on mods only if cheap"
+    },
+    "gloves": {
+      "must_have": [
+        "Maximum life ≥ 50",
+        "Resistances: 2 of 3 at 30%+"
+      ],
+      "ideal": [
+        "Cast speed ≥ 0.15",
+        "Maximum life ≥ 70",
+        "All resistances covered"
+      ],
+      "note": "Cast speed on gloves is a nice-to-have, not must-have"
+    },
+    "boots": {
+      "must_have": [
+        "Movement speed ≥ 25%",
+        "Maximum life ≥ 60",
+        "Resistances: 2 of 3 at 30%+"
+      ],
+      "ideal": [
+        "Movement speed ≥ 30%",
+        "Maximum life ≥ 80",
+        "All resistances capped"
+      ],
+      "critical_priority": "Movement speed is QoL lifesaver; rhythm plants feet; time between casts is danger zone",
+      "note": "Do NOT sacrifice movement speed for small life gains"
+    },
+    "rings": {
+      "must_have": [
+        "Maximum life ≥ 40 (per ring)",
+        "Resistances: 2 of 3 at 30%+ (per ring)"
+      ],
+      "ideal": [
+        "Maximum life ≥ 60",
+        "Flat chaos to spells ≥ 10",
+        "Crit chance ≥ 10%",
+        "Resistances capped"
+      ],
+      "note": "Jewelry is flexible; chaos res bonus (melee-range remnant pickup)"
+    },
+    "amulet": {
+      "must_have": [
+        "Maximum life ≥ 40",
+        "Resistances: 1 of 3 at 30%+"
+      ],
+      "ideal": [
+        "Maximum life ≥ 60",
+        "Flat chaos to spells ≥ 15",
+        "Crit multiplier ≥ 30%",
+        "All resistances covered"
+      ],
+      "unique_check": "Crown of Eyes (if crit-heavy build); validate vs rare DPS"
+    },
+    "flask": {
+      "type": "Life Flask (1-2 flasks allocated)",
+      "must_have": [
+        "Recovery rate ≥ 30%",
+        "Life recovery ≥ 600+ HP"
+      ],
+      "ideal": [
+        "Instant recovery when low (below 50%)",
+        "Recovery rate ≥ 40%",
+        "Charge recovery +1-2",
+        "Reduced effect of curses (self-defense)"
+      ],
+      "priority": "TIER-0 after life pool; life-spend mechanic makes flask a weapon",
+      "note": "Do not settle for generic flasks; treat like gear slot"
+    }
+  },
+  "damage_floor_checklist": {
+    "spell_crit_chance": {
+      "minimum": 35,
+      "comfortable": 50,
+      "formula": "15% (Sunder base) + tree + gear"
+    },
+    "chaos_damage": {
+      "minimum_spell_damage": 100,
+      "minimum_flat_chaos": 30,
+      "note": "Flat chaos > % early; balance mid-late"
+    },
+    "cast_speed": {
+      "minimum": 0.8,
+      "comfortable": 1.0,
+      "formula": "Base + gear + tree"
+    }
+  },
+  "defense_floor_checklist": {
+    "maximum_life": {
+      "acts_1_2": 300,
+      "act_3": 600,
+      "maps_early": 1200,
+      "maps_mid": 1500,
+      "maps_late": 2000,
+      "note": "Unreserved life must absorb several casts + one nasty hit"
+    },
+    "resistances": {
+      "act_3": "50%+ fire, cold, lightning",
+      "maps": "75% all capped",
+      "chaos_res": "0-20% acceptable; 30%+ comfort"
+    }
+  },
+  "gear_eval_formula": {
+    "step_1": "Does item feed the loop (life + crit + curse + remnants)?",
+    "step_2": "If not, does it unlock a floor (resistances, attributes)?",
+    "step_3": "If neither, skip unless dirt-cheap or unique synergy"
+  }
+}
