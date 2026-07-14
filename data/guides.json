@@ -1,0 +1,24 @@
+{
+  "site": {
+    "name": "Exile Codex",
+    "tagline": "AI-crafted Path of Exile 2 build guides",
+    "blurb": "A growing library of deeply-reasoned PoE2 builds. Every guide pairs a written field manual with a fully interactive Path of Building embed — pan the passive tree, hover the gear, read the numbers.",
+    "patch": "0.5.x — July 2026"
+  },
+  "guides": [
+    {
+      "slug": "sanguine-detonation",
+      "title": "Sanguine Detonation",
+      "class": "Witch",
+      "ascendancy": "Blood Mage",
+      "archetype": "Spell",
+      "damage": "Chaos",
+      "difficulty": "Intermediate",
+      "budget": "Low → Mid",
+      "playstyle": "Curse & Detonate",
+      "skill": "Hexblast",
+      "tags": ["Hexblast", "Despair", "Crit", "Life-scaling", "Bosser"],
+      "summary": "A witch who pays for her spells in blood, curses everything, then detonates those curses in chains of chaos explosions. Life is her damage stat."
+    }
+  ]
+}
