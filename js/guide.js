@@ -35,20 +35,28 @@
   }
 
   function embedHTML(g) {
-    var openBtn = g.pobbId
-      ? '<a class="btn primary" href="https://pobb.in/' + encodeURIComponent(g.pobbId) +
-        '" target="_blank" rel="noopener">Open full build on pobb.in ↗</a>'
+    // The interactive view is a full Path of Building running in-browser
+    // (pob.cool / pob-web). The build is passed as a raw PoB2 export code in
+    // the URL hash — rendered entirely client-side, no share-host round trip.
+    var game = g.pobGame || "poe2";
+    var pobUrl = g.pobCode
+      ? "https://pob.cool/" + game + "#build=" + g.pobCode
+      : "";
+
+    var openBtn = pobUrl
+      ? '<a class="btn primary" href="' + pobUrl +
+        '" target="_blank" rel="noopener">Open in Path of Building ↗</a>'
       : "";
     var copyBtn = g.pobCode
       ? '<button class="btn" id="copy-pob" type="button">Copy PoB2 code</button>'
       : "";
 
     var shell;
-    if (g.pobbId) {
+    if (g.pobCode) {
       shell =
         '<div class="embed-shell">' +
           '<iframe title="Interactive Path of Building view of ' + esc(g.title) +
-          '" src="https://pobb.in/' + encodeURIComponent(g.pobbId) +
+          '" src="' + pobUrl +
           '" loading="lazy" allowfullscreen referrerpolicy="no-referrer"></iframe>' +
         "</div>";
     } else {
@@ -60,7 +68,7 @@
 
     var note = g.pobbNote
       ? '<div class="embed-note"><span class="warn-dot">⚠</span><span>' + esc(g.pobbNote) + "</span></div>"
-      : '<div class="embed-note"><span>Interactive passive tree &amp; hoverable gear are rendered by Path of Building via pobb.in. Use the tabs inside the frame to switch between Tree, Items, Skills and Notes.</span></div>';
+      : '<div class="embed-note"><span>Interactive passive tree &amp; hoverable gear are rendered by Path of Building, running in your browser. Use the tabs inside the frame to switch between Tree, Items, Skills and Notes.</span></div>';
 
     return (
       '<section class="build-embed">' +

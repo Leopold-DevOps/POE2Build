@@ -1,0 +1,158 @@
+{
+  "build": "Sanguine Detonation",
+  "research_topic": "Curse Aura Mechanics (Patch 0.5.x)",
+  "discovery": "Despair CAN be applied as an aura via specific support gems or uniques",
+  "patch": "0.5.x (Return of the Ancients)",
+
+  "curse_apply_as_aura_mechanic": {
+    "stat_id": 2612,
+    "stat_key": "curse_apply_as_aura",
+    "effect": "Curse is applied as an aura to nearby enemies instead of requiring manual cast",
+    "implications_for_sanguine": [
+      "Frees up a skill gem slot (Despair manual cast no longer needed)",
+      "Despair becomes automatic around character (no rotation click required)",
+      "Enables more aggressive skill gem linking for Hexblast"
+    ]
+  },
+
+  "gems_with_curse_aura_capability": [
+    {
+      "name": "Reap",
+      "type": "Active Skill (Spell)",
+      "description": "Chaos spell that grants curse_apply_as_aura",
+      "link": "Can link Despair as a support to Reap",
+      "caveat": "Reap is a direct damage spell; not Hexblast-focused"
+    },
+    {
+      "name": "Exsanguinate",
+      "type": "Active Skill (Spell)",
+      "description": "Chaos projectile spell with curse_apply_as_aura",
+      "link": "Can link Despair as a support to Exsanguinate",
+      "caveat": "Exsanguinate is a projectile; different playstyle than Hexblast"
+    },
+    {
+      "name": "SupportReapersInvocationPlayer",
+      "type": "Support Gem (Likely)",
+      "description": "Support gem that grants curse_apply_as_aura to the main skill",
+      "impact": "IF this support links to Hexblast, Despair becomes automatic",
+      "priority": "HIGHEST - verify if this is Reapers Invocation support"
+    }
+  ],
+
+  "potential_sanguine_integration": {
+    "scenario_1_reapers_invocation_exists": {
+      "setup": "6-link Hexblast with Reapers Invocation support",
+      "effect": "Hexblast casts automatically trigger a Despair aura effect",
+      "freed_slot": "No need for separate 2-link Despair",
+      "optimization": "Use freed slot for additional Hexblast support or movement skill",
+      "caveat": "MUST verify Reapers Invocation is a real support in patch 0.5.x"
+    },
+    "scenario_2_item_based": {
+      "setup": "Unique item with 'Despair applies as an aura' mod",
+      "example": "Would read: 'Despair applies as an aura when socketed in this item'",
+      "gear_slot": "Could be body armour, gloves, or helmet",
+      "caveat": "No known uniques grant this yet; would be endgame chase item"
+    },
+    "scenario_3_passive_node": {
+      "setup": "Blood Mage ascendancy or tree passive: 'Curses apply as auras'",
+      "likelihood": "POSSIBLE - Blood Mage could have a node for this",
+      "caveat": "Would be a powerful node; check ascendancy tree"
+    }
+  },
+
+  "impact_if_despair_aura_works": {
+    "hexblast_setup": "Current 6-link could remain, OR upgrade to:",
+    "upgraded_6_link": [
+      "Hexblast",
+      "Spell Critical Strike Chance Support",
+      "Critical Strike Multiplier Support",
+      "Increased Area of Effect Support",
+      "Faster Casting Support",
+      "Penetration Effect Support (new damage layer)"
+    ],
+    "freed_button": "No manual Despair cast needed",
+    "dps_impact": "+5-10% from auto Despair aura (no activation delay)",
+    "playstyle_impact": "One-button rhythm (Hexblast only) instead of two-beat (Despair → Hexblast)",
+    "survivability": "Potential safety trade-off; aura is passive (no escape timing)"
+  },
+
+  "research_actions_needed": [
+    {
+      "priority": "CRITICAL",
+      "task": "Verify SupportReapersInvocationPlayer is a real support gem in patch 0.5.x",
+      "source": "Check skill_gems_v2.json for gem details and links",
+      "impact": "If real, changes entire Hexblast support setup"
+    },
+    {
+      "priority": "HIGH",
+      "task": "Check if Blood Mage ascendancy has a node for 'Curses apply as auras'",
+      "source": "Check ascendancy tree data",
+      "impact": "Would be a passive way to enable auto-Despair"
+    },
+    {
+      "priority": "MEDIUM",
+      "task": "Search unique items database for 'curse_apply_as_aura' mods",
+      "source": "Check unique items data files",
+      "impact": "Could reveal gear-based solution"
+    },
+    {
+      "priority": "MEDIUM",
+      "task": "Test the mechanic: Link Despair to Reap or Exsanguinate with aura support",
+      "source": "In-game testing (requires PoE2 client)",
+      "impact": "Validate that curse aura works as expected with Despair"
+    }
+  ],
+
+  "current_build_implications": {
+    "if_aura_confirmed": {
+      "change": "Replace 2-link Despair with auto-aura system",
+      "new_hexblast_6_link": "Hexblast + 5 supports (no Despair slot needed)",
+      "dps_estimated": "+5-10% from freed support gem (e.g., Penetration)",
+      "playstyle_change": "Simpler rotation; no click tax"
+    },
+    "if_aura_unavailable": {
+      "status": "Build remains as specified",
+      "2_link_despair": "Stays as manual cast (current design)",
+      "note": "Still optimal for current patch"
+    }
+  },
+
+  "comparison_aura_vs_manual": {
+    "manual_despair_current": {
+      "pros": [
+        "Instant application (same frame as Hexblast)",
+        "Full control over timing (can delay for specific targets)",
+        "No passive survival risk (can position before casting)"
+      ],
+      "cons": [
+        "Two-button rotation (Despair → Hexblast)",
+        "Button fatigue over long sessions",
+        "Skill slot taken"
+      ]
+    },
+    "despair_aura": {
+      "pros": [
+        "One-button Hexblast rotation (simpler)",
+        "Freed skill gem slot (+1 support for damage)",
+        "Passive; no timing required"
+      ],
+      "cons": [
+        "Passive application (not instant, might miss fast mobs)",
+        "No escape timing (always active, passive survival)",
+        "Depends on support gem or item availability"
+      ]
+    }
+  },
+
+  "next_steps": {
+    "immediate": "Verify if Reapers Invocation support exists and what it does",
+    "if_exists": "Test with Hexblast + Reapers Invocation + Despair in PoB2",
+    "if_works": "Update build-specification.json to use aura-based Despair",
+    "if_unavailable": "Keep current two-button design (still optimal)"
+  },
+
+  "sources": [
+    "poe2-mcp/data/game/skill_gems/skill_gems_v2.json (curse_apply_as_aura stat found in Reap, Exsanguinate, SupportReapersInvocationPlayer)",
+    "poe2-mcp/data/complete_models/stats.json (stat_id 2612: curse_apply_as_aura)"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcps": {
+    "pob": {
+      "command": "node",
+      "args": ["../pob-mcp/build/index.js"]
+    }
+  }
+}
