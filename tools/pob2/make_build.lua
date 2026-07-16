@@ -12,9 +12,36 @@
 local here = (arg[0]:gsub("[/\\][^/\\]+$", ""))
 local M = dofile(here .. "/pob_harness.lua")
 
-local function jesc(s) return tostring(s):gsub("\\", "\\\\"):gsub('"', '\\"') end
+local function jesc(s)
+  return tostring(s):gsub("\\", "\\\\"):gsub('"', '\\"'):gsub("\n", " "):gsub("\r", "")
+end
 
 local cmd = arg[1]
+
+-- export-gems <outJson> : dump the real gem DB for the site's hover tooltips.
+-- Fields per gem: d=description, t=display tags, s=1 if support, i=reqInt, lv=max level.
+if cmd == "export-gems" then
+  local out = assert(arg[2], "usage: export-gems <outJson>")
+  local env = M.boot(here)
+  local b = M.newBuild(env, "export")
+  local rows, n = {}, 0
+  for _, g in pairs(b.build.data.gems) do
+    local ge = g.grantedEffect
+    if g.name and ge then
+      n = n + 1
+      rows[#rows + 1] = string.format(
+        '"%s":{"d":"%s","t":"%s","s":%d,"i":%d,"lv":%d}',
+        jesc(g.name), jesc(ge.description or ""), jesc(g.tagString or ""),
+        ge.support and 1 or 0, g.reqInt or 0, g.naturalMaxLevel or 20)
+    end
+  end
+  table.sort(rows)
+  local f = assert(io.open(out, "w"))
+  f:write("{", table.concat(rows, ","), "}")
+  f:close()
+  print("exported " .. n .. " gems -> " .. out)
+  return
+end
 
 if cmd == "discover" then
   local kind, query = arg[2], arg[3] or ""

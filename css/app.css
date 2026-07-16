@@ -186,7 +186,76 @@ img{max-width:100%;}
   border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--ink-deep);
   position:relative;
 }
-.embed-shell iframe{display:block;width:100%;height:min(78vh,760px);border:0;background:var(--ink-deep);}
+.embed-shell iframe{display:block;width:100%;height:min(86vh,900px);border:0;background:var(--ink-deep);}
+
+/* ---- build stat strip (shown beside the PoB, Maxroll-style) ---- */
+.pob-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;
+  margin:0 0 12px;overflow:hidden;
+}
+.pob-stats .s{background:var(--ink-surface);padding:10px 14px;}
+.pob-stats .s .k{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--bone-dim);
+}
+.pob-stats .s .v{font-family:'Cinzel',serif;font-size:19px;color:var(--gold);margin-top:2px;}
+.pob-stats .s .v.red{color:var(--blood-bright);}
+.pob-stats .s .v.purp{color:var(--hex-bright);}
+.pob-stats .s .v.good{color:var(--good);}
+
+/* ---- inline gem chips + hover tooltip (Maxroll-style) ---- */
+.gem{
+  display:inline-flex;align-items:center;gap:6px;vertical-align:baseline;
+  font-family:'IBM Plex Mono',monospace;font-size:.86em;letter-spacing:.02em;
+  color:var(--bone);background:var(--ink-surface);
+  border:1px solid var(--line);border-radius:3px;padding:1px 7px;
+  cursor:help;text-decoration:none;transition:border-color .15s,color .15s;
+}
+.gem::before{content:"";width:7px;height:7px;border-radius:2px;flex:none;background:var(--hex-bright);}
+.gem[data-kind="support"]::before{background:var(--gold);}
+.gem:hover,.gem:focus-visible{border-color:var(--hex-bright);color:#fff;outline:none;}
+.gem[data-kind="support"]:hover,.gem[data-kind="support"]:focus-visible{border-color:var(--gold);}
+.gem[data-missing]{opacity:.75;cursor:default;}
+.gem[data-missing]::before{background:var(--line);}
+
+#gem-tip{
+  position:fixed;z-index:80;max-width:340px;pointer-events:none;opacity:0;
+  transform:translateY(-4px);transition:opacity .12s ease;
+  background:var(--ink-surface);border:1px solid var(--hex);border-radius:4px;
+  padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+#gem-tip.show{opacity:1;}
+#gem-tip .gt-name{font-family:'Cinzel',serif;font-size:16px;color:var(--bone);}
+#gem-tip .gt-kind{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--hex-bright);margin-top:2px;
+}
+#gem-tip.support{border-color:var(--gold);}
+#gem-tip.support .gt-kind{color:var(--gold);}
+#gem-tip .gt-desc{font-size:14.5px;color:var(--bone-dim);line-height:1.55;margin-top:8px;}
+#gem-tip .gt-tags{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--bone-dim);
+  margin-top:9px;padding-top:8px;border-top:1px solid var(--line);
+}
+#gem-tip .gt-req{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);margin-top:4px;}
+
+/* gem link rows (skills section) */
+.gemrow{
+  display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);
+}
+.gemrow:last-child{border-bottom:none;}
+.gemrow .gr-main{min-width:190px;flex:none;}
+.gemrow .gr-why{color:var(--bone-dim);font-size:15px;line-height:1.55;}
+.gemgroup{
+  border:1px solid var(--line);border-radius:3px;background:var(--ink-surface);
+  padding:14px 18px;margin:18px 0;max-width:78ch;
+}
+.gemgroup .gg-head{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:4px;
+}
+.gemgroup .gg-sub{font-size:14px;color:var(--bone-dim);margin-bottom:6px;}
 .embed-note{
   font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--bone-dim);
   margin-top:10px;display:flex;gap:8px;align-items:flex-start;
@@ -241,18 +310,18 @@ nav.toc a:hover,nav.toc a:focus-visible{color:var(--gold);border-bottom-color:va
 .guide-body strong{color:var(--bone);font-weight:700;}
 .lede{font-size:20px;color:var(--bone);max-width:70ch;}
 
-/* concept boxes */
+/* concept boxes — flat panel, no left accent bar; the label carries the colour */
 .box{
-  border:1px solid var(--line);border-left:3px solid var(--hex);
-  background:var(--ink-surface);padding:18px 22px;margin:22px 0;border-radius:2px;max-width:78ch;
+  border:1px solid var(--line);
+  background:var(--ink-surface);padding:18px 22px;margin:22px 0;border-radius:3px;max-width:78ch;
 }
 .box .box-label{
   font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.25em;
   text-transform:uppercase;color:var(--hex-bright);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
 }
-.box.blood{border-left-color:var(--blood);}
+.box .box-label::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none;}
 .box.blood .box-label{color:var(--blood-bright);}
-.box.patch{border-left-color:var(--warn);}
 .box.patch .box-label{color:var(--warn);}
 .box p:last-child{margin-bottom:0;}
 

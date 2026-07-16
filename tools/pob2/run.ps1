@@ -25,7 +25,8 @@ param(
   [string]$Slug,
   [ValidateSet('nodes','gems','bases','affixes')][string]$Discover,
   [string]$Query = "",
-  [string]$Class = "Witch"
+  [string]$Class = "Witch",
+  [switch]$ExportGems   # regenerate data/gems.json (gem DB for site hover tooltips)
 )
 $ErrorActionPreference = "Stop"
 $toolDir = $PSScriptRoot
@@ -59,6 +60,15 @@ if ($Discover) {
   return
 }
 
+# --- export the gem DB used by the site's hover tooltips ---------------------
+if ($ExportGems) {
+  & $luajit $mbShort export-gems "$cacheShort\gems.json"
+  $dest = Join-Path $toolDir "..\..\data\gems.json"
+  Copy-Item (Join-Path $cache "gems.json") $dest -Force
+  Write-Host "gems.json -> $dest"
+  return
+}
+
 # --- build mode -------------------------------------------------------------
 if (-not $Spec) { throw "Provide -Spec <file> to build, or -Discover <kind> -Query <q>." }
 if (-not (Test-Path $Spec)) { throw "Spec not found: $Spec" }
@@ -84,9 +94,20 @@ if (Test-Path (Join-Path $cache "stats.json")) {
   Write-Host "`nStats:"; Get-Content (Join-Path $cache "stats.json")
 }
 
-# Optionally write the code into a guide JSON's pobCode field.
+# Optionally write the code + real engine stats into the guide JSON.
 if ($Slug) {
   $guide = Join-Path $toolDir "..\..\data\guides\$Slug.json"
   if (-not (Test-Path $guide)) { throw "Guide not found: $guide" }
-  python -c "import json,sys; p=sys.argv[1]; d=json.load(open(p,encoding='utf-8')); d['pobCode']=open(sys.argv[2],encoding='utf-8').read().strip(); json.dump(d,open(p,'w',encoding='utf-8'),indent=2,ensure_ascii=False); print('guide updated:', p)" "$guide" "$codePath"
+  $statsPath = Join-Path $cache "stats.json"
+  python -c @"
+import json,sys
+guide, codeP, statsP = sys.argv[1], sys.argv[2], sys.argv[3]
+d = json.load(open(guide, encoding='utf-8'))
+d['pobCode'] = open(codeP, encoding='utf-8').read().strip()
+s = json.load(open(statsP, encoding='utf-8'))
+keep = ('DPS','CritChance','Life','ES','Int','FireRes','ColdRes','LightningRes','ChaosRes','treePoints')
+d['pobStats'] = {k: s[k] for k in keep if k in s}
+json.dump(d, open(guide,'w',encoding='utf-8'), indent=2, ensure_ascii=False)
+print('guide updated (pobCode + pobStats):', guide)
+"@ "$guide" "$codePath" "$statsPath"
 }

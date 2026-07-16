@@ -30,7 +30,14 @@ No project build step; everything is driven by `run.ps1`.
 
 # 2) Just build (no guide update) — code lands in tools/pob2/.cache/code.txt:
 ./tools/pob2/run.ps1 -Spec ./tools/pob2/specs/sanguine-detonation.lua
+
+# 3) Regenerate data/gems.json (the gem DB behind the site's hover tooltips):
+./tools/pob2/run.ps1 -ExportGems
 ```
+
+With `-Slug`, the run writes **both** `pobCode` and `pobStats` (real engine DPS / crit /
+life / ES / resists) into the guide — the build page renders `pobStats` as the stat strip
+above the PoB frame, so the numbers can never drift from the actual build.
 
 The run prints a line like:
 ```
@@ -102,6 +109,19 @@ return {
 
 `-Discover affixes` is the important one for itemization: it lists exactly which
 prefixes/suffixes (with roll ranges) can appear on a base, so your `wants` always hit.
+
+## Hoverable gems in guide prose (Maxroll-style)
+
+Write a gem anywhere in a guide's section HTML as:
+
+```html
+<span class="gem" data-gem="Hexblast">Hexblast</span>
+```
+
+`js/guide.js` lazy-loads `data/gems.json` (only if the page has gem chips), colours the
+chip by type (purple = active, gold = support), and shows a hover/focus tooltip with the
+gem's **real in-game description, tags and Int requirement**. Unknown names are rendered
+greyed-out rather than lying — regenerate the DB with `-ExportGems` after a patch.
 
 ## Files
 

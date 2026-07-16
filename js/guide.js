@@ -34,6 +34,34 @@
     toast._t = setTimeout(function () { t.classList.remove("show"); }, 1800);
   }
 
+  // Key build stats shown as a strip above the PoB frame. Values come from the
+  // real engine (written into the guide by tools/pob2/run.ps1).
+  function statStripHTML(s) {
+    if (!s) return "";
+    var cells = [];
+    function cell(k, v, cls) {
+      if (v === undefined || v === null || v === "") return;
+      cells.push('<div class="s"><div class="k">' + esc(k) + '</div><div class="v ' +
+        (cls || "") + '">' + esc(v) + "</div></div>");
+    }
+    function num(n) {
+      n = Number(n);
+      if (!isFinite(n)) return null;
+      return n >= 1000 ? Math.round(n).toLocaleString() : Math.round(n * 10) / 10;
+    }
+    cell("DPS", num(s.DPS), "red");
+    cell("Crit", s.CritChance != null ? Math.round(s.CritChance) + "%" : null, "purp");
+    cell("Life", num(s.Life));
+    cell("Energy Shield", num(s.ES));
+    if (s.FireRes != null) {
+      var capped = s.FireRes >= 75 && s.ColdRes >= 75 && s.LightningRes >= 75;
+      cell("Resistances", s.FireRes + "/" + s.ColdRes + "/" + s.LightningRes,
+        capped ? "good" : "red");
+    }
+    cell("Level", s.level || null);
+    return cells.length ? '<div class="pob-stats">' + cells.join("") + "</div>" : "";
+  }
+
   function embedHTML(g) {
     // The interactive view is a full Path of Building running in-browser
     // (pob.cool / pob-web). The build is passed as a raw PoB2 export code in
@@ -68,20 +96,81 @@
 
     var note = g.pobbNote
       ? '<div class="embed-note"><span class="warn-dot">⚠</span><span>' + esc(g.pobbNote) + "</span></div>"
-      : '<div class="embed-note"><span>Interactive passive tree &amp; hoverable gear are rendered by Path of Building, running in your browser. Use the tabs inside the frame to switch between Tree, Items, Skills and Notes.</span></div>';
+      : '<div class="embed-note"><span>Full Path of Building running in your browser — switch between Tree, Items, Skills and Notes inside the frame. Hover any node or item for its real tooltip.</span></div>';
 
     return (
       '<section class="build-embed">' +
         '<div class="frame wide">' +
           '<div class="be-head">' +
-            "<h2>Interactive Build</h2>" +
+            "<h2>The Build</h2>" +
             '<div class="be-actions">' + copyBtn + openBtn + "</div>" +
           "</div>" +
+          statStripHTML(g.pobStats) +
           shell +
           note +
         "</div>" +
       "</section>"
     );
+  }
+
+  /* ---------- gem chips: hover tooltips from the real PoB2 gem DB ---------- */
+  var gemDB = null, gemTip = null;
+
+  function ensureTip() {
+    if (gemTip) return gemTip;
+    gemTip = document.createElement("div");
+    gemTip.id = "gem-tip";
+    document.body.appendChild(gemTip);
+    return gemTip;
+  }
+
+  function showTip(el) {
+    var name = el.getAttribute("data-gem");
+    var g = gemDB && gemDB[name];
+    if (!g) return;
+    var tip = ensureTip();
+    var isSup = g.s === 1;
+    tip.className = isSup ? "support" : "";
+    tip.innerHTML =
+      '<div class="gt-name">' + esc(name) + "</div>" +
+      '<div class="gt-kind">' + (isSup ? "Support Gem" : "Active Skill") + "</div>" +
+      '<div class="gt-desc">' + esc(g.d) + "</div>" +
+      (g.t ? '<div class="gt-tags">' + esc(g.t) + "</div>" : "") +
+      (g.i ? '<div class="gt-req">Requires ' + esc(g.i) + " Int · max level " + esc(g.lv) + "</div>" : "");
+    // position near the chip, flipped/clamped to stay on screen
+    var r = el.getBoundingClientRect();
+    tip.classList.add("show");
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var left = Math.min(Math.max(8, r.left), window.innerWidth - tw - 8);
+    var top = r.top - th - 10;
+    if (top < 8) top = r.bottom + 10;
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+
+  function hideTip() { if (gemTip) gemTip.classList.remove("show"); }
+
+  function wireGems(scope) {
+    var chips = scope.querySelectorAll("[data-gem]");
+    if (!chips.length) return;
+    // lazy-load the gem DB only when a page actually references gems
+    fetch("data/gems.json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (db) {
+        gemDB = db || {};
+        Array.prototype.forEach.call(chips, function (el) {
+          var g = gemDB[el.getAttribute("data-gem")];
+          if (!g) { el.setAttribute("data-missing", "1"); return; }
+          el.setAttribute("data-kind", g.s === 1 ? "support" : "active");
+          el.setAttribute("tabindex", "0");
+          el.addEventListener("mouseenter", function () { showTip(el); });
+          el.addEventListener("focus", function () { showTip(el); });
+          el.addEventListener("mouseleave", hideTip);
+          el.addEventListener("blur", hideTip);
+        });
+      })
+      .catch(function () { /* tooltips are progressive enhancement */ });
+    window.addEventListener("scroll", hideTip, { passive: true });
   }
 
   function tocHTML(sections) {
@@ -123,6 +212,7 @@
       "</div></section>";
 
     root.innerHTML = hero + embedHTML(g) + tocHTML(g.sections || []) + sectionsHTML(g.sections || []);
+    wireGems(root);
 
     var copyBtn = document.getElementById("copy-pob");
     if (copyBtn && g.pobCode) {
