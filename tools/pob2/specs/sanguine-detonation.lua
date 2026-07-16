@@ -12,8 +12,9 @@ return {
   ascendancy = "Blood Mage",
   level = 82,
 
-  -- Best two Blood Mage notables that fit the 8-point cap.
-  ascendancyNodes = { "Gore Spike", "Crimson Power" },
+  -- Priority order; the 8-point cap takes as many as fit. Sunder first — it sets base
+  -- spell crit to 15% (the crit enabler), then Gore Spike (crit dmg per life).
+  ascendancyNodes = { "Sunder the Flesh", "Gore Spike", "Crimson Power" },
 
   -- Priority-ordered tree (allocated until budget). Jewel-socket node ids inline so
   -- they get allocated within budget. Level-82 budget is ~105; 100 leaves headroom.
@@ -43,13 +44,13 @@ return {
   -- Every `want` below matches a REAL affix confirmed to roll on that base (verified via
   -- `run.ps1 -Discover affixes -Query "<base>"`). Max 3 prefixes + 3 suffixes per item.
   gear = {
-    -- Wand: pure spell-damage + crit weapon.
+    -- Wand: +level to Hexblast (chaos spell) + spell/chaos damage + crit.
     { base = "Attuned Wand", name = "Doom Whisper", wants = {
-      "increased Chaos Damage", "increased Spell Damage",
+      "Level of all Chaos Spell Skills", "increased Chaos Damage", "increased Spell Damage",
       "Critical Hit Chance for Spells", "Critical Spell Damage Bonus", "increased Cast Speed" } },
-    -- Focus off-hand: ES + spell damage (no Life — Focus can't roll it).
+    -- Focus off-hand: +2 spell levels + spell damage + ES (no Life — Focus can't roll it).
     { base = "Attuned Focus", name = "Sanguine Ward", wants = {
-      "increased Spell Damage", "increased Chaos Damage", "maximum Energy Shield",
+      "Level of all Spell Skills", "increased Spell Damage", "maximum Energy Shield",
       "Critical Spell Damage Bonus", "Critical Hit Chance for Spells", "to Intelligence" } },
     -- Body: ES (Crimson Power turns it into Life) + Life + resists + Int.
     { base = "Altar Robe", name = "Sanguine Shroud", wants = {
@@ -65,35 +66,28 @@ return {
     { base = "Bangled Sandals", name = "Crimson Stride", wants = {
       "increased Movement Speed", "maximum Life", "maximum Energy Shield",
       "to Fire Resistance", "to Cold Resistance" } },
-    -- Rings: % Chaos Damage + spell crit + Life + resists (no flat added-to-spells on rings).
+    -- Rings: one carries +spell levels; both add % Chaos Damage + spell crit + Life + resist.
     { base = "Amethyst Ring", name = "Doom Coil", wants = {
-      "maximum Life", "increased Chaos Damage",
-      "Critical Hit Chance for Spells", "to Fire Resistance", "to Intelligence" } },
+      "Level of all Spell Skills", "maximum Life", "increased Chaos Damage",
+      "Critical Hit Chance for Spells", "to Fire Resistance" } },
     { base = "Amethyst Ring", name = "Blight Loop", wants = {
       "maximum Life", "increased Chaos Damage",
-      "to Lightning Resistance", "to Cold Resistance", "to Intelligence" } },
-    -- Amulet: Life + spell/chaos damage + crit multi (generic "Critical Damage Bonus").
+      "Critical Hit Chance for Spells", "to Lightning Resistance", "to Cold Resistance" } },
+    -- Amulet: Life + spell damage + crit chance & multi (generic "Critical Damage Bonus").
     { base = "Azure Amulet", name = "Sanguine Noose", wants = {
-      "maximum Life", "increased Spell Damage", "increased Chaos Damage",
-      "Critical Damage Bonus", "to all Attributes", "to Lightning Resistance" } },
+      "maximum Life", "increased Spell Damage",
+      "Critical Damage Bonus", "increased Critical Hit Chance", "to all Attributes", "to Lightning Resistance" } },
     { base = "Ornate Belt", name = "Crimson Girdle", wants = {
       "maximum Life", "maximum Energy Shield",
       "to Fire Resistance", "to Chaos Resistance", "to Lightning Resistance" } },
   },
 
-  -- Jewels: PoB2 jewels roll generic `Jewel*` mods (verified real on these bases).
+  -- Jewels: all Emerald (one verified pool). PoB2 jewels lack chaos/spell-crit mods, so
+  -- the best real pick for a boss-killer is % Damage vs Rare & Unique.
   jewels = {
-    { socket = 61419, base = "Emerald", name = "Doom Shard", wants = {
-      "increased Damage with Hits against Rare and Unique", "increased Elemental Damage",
-      "increased Critical Damage Bonus", "Magnitude of Damaging Ailments" } },
-    { socket = 61834, base = "Ruby", name = "Blood Ember", wants = {
-      "increased Damage with Hits against Rare and Unique", "increased Elemental Damage",
-      "increased Critical Damage Bonus", "Magnitude of Damaging Ailments" } },
-    { socket = 7960, base = "Sapphire", name = "Grim Facet", wants = {
-      "increased Damage with Hits against Rare and Unique", "increased Elemental Damage",
-      "increased Critical Damage Bonus", "Magnitude of Damaging Ailments" } },
-    { socket = 26196, base = "Diamond", name = "Vile Prism", wants = {
-      "increased Damage with Hits against Rare and Unique", "increased Elemental Damage",
-      "increased Critical Damage Bonus", "Magnitude of Damaging Ailments" } },
+    { socket = 61419, base = "Emerald", name = "Doom Shard", wants = { "increased Damage with Hits against Rare and Unique" } },
+    { socket = 61834, base = "Emerald", name = "Blood Ember", wants = { "increased Damage with Hits against Rare and Unique" } },
+    { socket = 7960,  base = "Emerald", name = "Grim Facet", wants = { "increased Damage with Hits against Rare and Unique" } },
+    { socket = 26196, base = "Emerald", name = "Vile Prism", wants = { "increased Damage with Hits against Rare and Unique" } },
   },
 }
