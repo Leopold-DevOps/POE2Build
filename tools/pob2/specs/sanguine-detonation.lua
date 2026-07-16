@@ -44,10 +44,14 @@ return {
   -- Every `want` below matches a REAL affix confirmed to roll on that base (verified via
   -- `run.ps1 -Discover affixes -Query "<base>"`). Max 3 prefixes + 3 suffixes per item.
   gear = {
-    -- Wand: +level to Hexblast (chaos spell) + spell/chaos damage + crit.
+    -- Wand: THE damage item. Built via craftItem so group/weight rules are enforced
+    -- (raw text would bypass them). Adding the missing 3rd prefix: "gain % of damage as
+    -- extra <element>" — engine-tested at +33k DPS, and a real craftable wand prefix.
+    -- NOTE: the +level suffix stacking rules are still being verified; see
+    -- research/wand-crafting-plan.md §7.
     { base = "Attuned Wand", name = "Doom Whisper", wants = {
-      "Level of all Chaos Spell Skills", "increased Chaos Damage", "increased Spell Damage",
-      "Critical Hit Chance for Spells", "Critical Spell Damage Bonus", "increased Cast Speed" } },
+      "increased Chaos Damage", "increased Spell Damage", "of Damage as Extra Fire Damage",
+      "Level of all Chaos Spell Skills", "Critical Hit Chance for Spells", "Critical Spell Damage Bonus" } },
     -- Focus off-hand: +2 spell levels + spell damage + ES (no Life — Focus can't roll it).
     { base = "Attuned Focus", name = "Sanguine Ward", wants = {
       "Level of all Spell Skills", "increased Spell Damage", "maximum Energy Shield",
